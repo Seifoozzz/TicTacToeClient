@@ -44,7 +44,7 @@ public class ServerHandler extends Thread {
             clientVector.add(this);
             try {
                  DriverManager.registerDriver(new ClientDriver());
-                 con = DriverManager.getConnection("jdbc:derby://localhost:1527/Players", "seif", "mmhzs");
+                 con = DriverManager.getConnection("jdbc:derby://localhost:1527/database", "aya", "123456");
             } catch (SQLException ex) {
                 Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -58,6 +58,7 @@ public class ServerHandler extends Thread {
     while(true){
         try {
             String key =dis.readUTF();
+            
             authintication(key);
         } catch (IOException ex) {
             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,9 +85,11 @@ public class ServerHandler extends Thread {
              ps = con.prepareStatement("SELECT * FROM PLAYERS");
               rs=ps.executeQuery();
             while(rs.next()){
-                System.out.println(rs.getString("USERNAME"));
+               
             
-                if (email.equals(rs.getString("USERNAME")) && password.equals(rs.getString("PASSWORD"))){
+                if (email.equals(rs.getString("EMAIL")) && password.equals(rs.getString("PASSWORD"))){
+                     System.out.println(rs.getString("EMAIL"));
+                      System.out.println(rs.getString("PASSWORD"));
                     isFound = true;
                     break;
                 }             
@@ -100,14 +103,18 @@ public class ServerHandler extends Thread {
     }
 
     private void showMessage(boolean isFound) {
-        if(isFound) JOptionPane.showMessageDialog(null, "Successfully Logged In");
+        if(isFound){ 
+            System.out.println("successfully loged in");
+            JOptionPane.showMessageDialog(null, "Successfully Logged In");}
         else JOptionPane.showMessageDialog(null, "Incorrect Email or Password");
     }
     public void authintication(String key){
-    if(key.equals("Login")){
+    if(key.equals("Sign in")){
         try {
             String email = dis.readUTF();
             String password = dis.readUTF();
+            
+            
             loginUser(email, password);
         } catch (IOException ex) {
             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
