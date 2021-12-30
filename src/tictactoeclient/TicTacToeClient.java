@@ -155,7 +155,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
              dataOutputStream = new DataOutputStream(socket.getOutputStream());  
              dataInputStream = new DataInputStream(socket.getInputStream()); 
             
-           } catch (Exception e) {}
+           } catch (Exception e) {} 
         
     }
     
