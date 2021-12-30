@@ -387,12 +387,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new TicTacToeClient().setVisible(true);
+               // new TicTacToeClient().setVisible(true);
             }
             
         });
          try {  
-            socket = new Socket("127.0.0.1", 5004);  
+             socket = new Socket("127.0.0.1", 5004);  
              dataOutputStream = new DataOutputStream(socket.getOutputStream());  
              dataInputStream = new DataInputStream(socket.getInputStream()); 
             
