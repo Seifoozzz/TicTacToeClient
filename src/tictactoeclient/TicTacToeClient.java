@@ -1046,6 +1046,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.next(mycards);
     }//GEN-LAST:event_signUpScreenLabelMousePressed
+        
+                                         
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
