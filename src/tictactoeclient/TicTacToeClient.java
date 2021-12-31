@@ -842,6 +842,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
+        
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -884,7 +885,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
             
         });
          try {  
-             socket = new Socket("127.0.0.1", 5004);
+             socket = new Socket("172.20.10.3", 5004);
              dataOutputStream = new DataOutputStream(socket.getOutputStream());  
              dataInputStream = new DataInputStream(socket.getInputStream()); 
             
