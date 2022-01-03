@@ -67,11 +67,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
         if(flag.equalsIgnoreCase("X"))
         {
             flag = "O";
-            jLabel1.setText(" O turn");
+            jLabel46.setText(" O turn");
         }else
         {
             flag = "X";
-            jLabel1.setText(" X turn");
+            jLabel46.setText(" X turn");
         }
             
         
@@ -93,6 +93,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 gameScore();
                 closeButtons();
                 cx = false;
+                new NewJFrame().setVisible(true);
                 return true;
                 
             }// end if
@@ -113,6 +114,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 gameScore();
                 closeButtons();
                 cx = false;
+                new NewJFrame().setVisible(true);
                 return true;
             }// end if
             
@@ -132,6 +134,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 gameScore();
                 closeButtons();
                 cx = false;
+                new NewJFrame().setVisible(true);
               return true;
             }// end if
             
@@ -150,11 +153,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 arr[r1].setBackground(Color.red);
                 arr[r2].setBackground(Color.red);
                 arr[r3].setBackground(Color.red);
-                JOptionPane.showMessageDialog(this, "Player x is win ");
+                JOptionPane.showMessageDialog(this, "Player O is win ");
                 oCounter++;
                 gameScore();
                 closeButtons();
                 co = false;
+                new NewJFrame().setVisible(true);
                 return true;
                  
             }// end if
@@ -168,11 +172,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 arr[c1].setBackground(Color.red);
                 arr[c2].setBackground(Color.red);
                 arr[c3].setBackground(Color.red);
-                JOptionPane.showMessageDialog(this, "Player x is win ");
+                JOptionPane.showMessageDialog(this, "Player O is win ");
                 oCounter++;
                 gameScore();
                 closeButtons();
                 co = false;
+                new NewJFrame().setVisible(true);
                 return true;
             }// end if
             
@@ -185,11 +190,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 arr[d1].setBackground(Color.red);
                 arr[d2].setBackground(Color.red);
                 arr[d3].setBackground(Color.red);
-                JOptionPane.showMessageDialog(this, "Player x is win ");
+                JOptionPane.showMessageDialog(this, "Player O is win ");
                 oCounter++;
                 gameScore();
                 closeButtons();
                 co = false;
+                new NewJFrame().setVisible(true);
                 return true;
                 
             }// end if
@@ -198,6 +204,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         co = true;
      return false;
     }// end xwin method
+    
     public void closeButtons()
     {
         for(int x = 0; x <9; x++ )
