@@ -34,6 +34,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     int draw =0;
     boolean cx = false;
     boolean co = false;
+    Boolean success=false;
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
         initComponents();
@@ -254,10 +255,10 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        signUserName = new javax.swing.JTextField();
+        signEmail = new javax.swing.JTextField();
+        signPass = new javax.swing.JPasswordField();
+        confPass = new javax.swing.JPasswordField();
         signUpScreenLabel = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -604,21 +605,21 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Confirm Password");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        signEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                signEmailActionPerformed(evt);
             }
         });
 
-        jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
+        signPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField2ActionPerformed(evt);
+                signPassActionPerformed(evt);
             }
         });
 
-        jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
+        confPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField3ActionPerformed(evt);
+                confPassActionPerformed(evt);
             }
         });
 
@@ -701,22 +702,22 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel22)
                                 .addGap(18, 18, 18)
-                                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(confPass, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel20)
                                         .addGap(46, 46, 46)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(signEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel21)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(signPass, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(signUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
@@ -769,11 +770,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
                                 .addGap(37, 37, 37))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(signUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(59, 59, 59)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(signEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(45, 45, 45)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -782,10 +783,10 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(signPass, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(61, 61, 61)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confPass, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel25)))
                     .addComponent(jLabel29))
@@ -845,7 +846,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel52.setForeground(new java.awt.Color(102, 102, 0));
         jLabel52.setText("Your Profile  ");
 
-        logoProfile.setIcon(new javax.swing.ImageIcon("D:\\logo_3.jpeg")); // NOI18N
         logoProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoProfileActionPerformed(evt);
@@ -1422,15 +1422,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
     private void signinLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinLabelMousePressed
         // TODO add your handling code here:
-        CardLayout card=(CardLayout)mycards.getLayout();
-        for(int i=0;i<2;i++){
-          card.next(mycards);
-        }
-       // card.last(mycards);
-        
-        
-        
-         try {
+       try {
             String email = emailField.getText().trim();
             String password = passwordFeild.getText().trim();
             String key=signinLabel.getText();
@@ -1440,15 +1432,32 @@ public class TicTacToeClient extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+          try {
+            // TODO add your handling code here:
+            success=dataInputStream.readBoolean();
+            System.out.println(success);
+        } catch (IOException ex) {
+            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(success){
+            JOptionPane.showMessageDialog(null, "Logged in Succcessfully");
+         CardLayout card=(CardLayout)mycards.getLayout();
+        for(int i=0;i<2;i++){
+          card.next(mycards);
+        }
+        
+        }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+       // card.last(mycards);
     }//GEN-LAST:event_signinLabelMousePressed
 
-    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
+    private void signPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signPassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField2ActionPerformed
+    }//GEN-LAST:event_signPassActionPerformed
 
-    private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
+    private void confPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confPassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField3ActionPerformed
+    }//GEN-LAST:event_confPassActionPerformed
 
     private void signUpLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpLabelMousePressed
         // TODO add your handling code here:
@@ -1482,16 +1491,35 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }//GEN-LAST:event_offlineLabelMousePressed
 
     private void signUpScreenLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpScreenLabelMousePressed
-        // TODO add your handling code here:
-        CardLayout card=(CardLayout)mycards.getLayout();
-        card.next(mycards);
+        try {      
+            // TODO add your handling code here:
+            
+            // TODO add your handling code here:
+            String email = signEmail.getText().trim();
+            String userName = signUserName.getText().trim();
+            String password = signPass.getText().trim();
+            String confirmPass = confPass.getText().trim();
+            String key=signUpScreenLabel.getText();
+            dataOutputStream.writeUTF(key);
+            dataOutputStream.writeUTF(userName);
+            dataOutputStream.writeUTF(email);
+            dataOutputStream.writeUTF(password);
+            success=dataInputStream.readBoolean();
+            if(success){
+                JOptionPane.showMessageDialog(null, "registered successfully");
+                CardLayout card=(CardLayout)mycards.getLayout();
+                card.next(mycards);
+            } else  JOptionPane.showMessageDialog(null, "unsuccessfull regestration review your data and try again");
+        } catch (IOException ex) {
+            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_signUpScreenLabelMousePressed
         
                                          
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void signEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_signEmailActionPerformed
 
     private void easyLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_easyLabelMousePressed
         // TODO add your handling code here:
@@ -1717,7 +1745,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
             
         });
          try {  
-             socket = new Socket("172.20.10.3", 5004);
+             socket = new Socket("127.0.0.1", 5004);
              dataOutputStream = new DataOutputStream(socket.getOutputStream());  
              dataInputStream = new DataInputStream(socket.getInputStream()); 
             
@@ -1727,6 +1755,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel computerLabel;
+    private javax.swing.JPasswordField confPass;
     private javax.swing.JLabel drawcont;
     private javax.swing.JLabel drawlable;
     private javax.swing.JLabel easyLabel;
@@ -1807,11 +1836,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lable;
@@ -1826,8 +1851,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel playerO;
     private javax.swing.JLabel playerX;
     private javax.swing.JButton resetBtn;
+    private javax.swing.JTextField signEmail;
+    private javax.swing.JPasswordField signPass;
     private javax.swing.JLabel signUpLabel;
     private javax.swing.JLabel signUpScreenLabel;
+    private javax.swing.JTextField signUserName;
     private javax.swing.JLabel signinLabel;
     // End of variables declaration//GEN-END:variables
 }
