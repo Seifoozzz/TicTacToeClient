@@ -35,6 +35,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
     boolean cx = false;
     boolean co = false;
     Boolean success=false;
+    String playerName;
+    String playerEmail;
+    int playerGames ;
+    int playerWins;
+    int playerLoses;
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
         initComponents();
@@ -107,9 +112,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String b3 = arr[c3].getText();
             if(b1.equalsIgnoreCase("X") && b2.equalsIgnoreCase("X") && b3.equalsIgnoreCase("X"))
             {
-                arr[c1].setBackground(Color.red);
-                arr[c2].setBackground(Color.red);
-                arr[c3].setBackground(Color.red);
+                arr[c1].setBackground(Color.green);
+                arr[c2].setBackground(Color.green);
+                arr[c3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player x is win ");
                 xCounter++;
                 gameScore();
@@ -278,7 +283,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         onlineLabel = new javax.swing.JLabel();
         offlineLabel = new javax.swing.JLabel();
         computerLabel = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
         logoProfile = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -289,8 +293,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -298,11 +300,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
+        ProfileUserName = new javax.swing.JTextField();
+        profileUserEmail = new javax.swing.JTextField();
+        profileGames = new javax.swing.JLabel();
+        profileWins = new javax.swing.JLabel();
+        profileLose = new javax.swing.JLabel();
+        btnProfileBack = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
@@ -324,8 +327,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         playerX = new javax.swing.JLabel();
         playerO = new javax.swing.JLabel();
         drawlable = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -838,9 +839,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel16.setText("Hello Player");
-
         jLabel52.setBackground(new java.awt.Color(255, 255, 153));
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(102, 102, 0));
@@ -881,8 +879,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addComponent(logoProfile)
                             .addGap(322, 322, 322)
                             .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(144, 144, 144)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(334, 334, 334)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jLabel52)))
@@ -894,9 +891,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16)))
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabel52)
@@ -966,15 +961,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
             }
         });
 
-        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel51.setText("Player Profile");
-
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -1001,22 +987,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(457, 457, 457)
-                        .addComponent(mediumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel51))))
+                        .addComponent(mediumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel51)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(174, 174, 174)
                 .addComponent(jLabel43)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel44)
@@ -1061,17 +1038,25 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel42.setForeground(new java.awt.Color(255, 255, 153));
         jLabel42.setText("Player Profile");
 
-        jLabel48.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(51, 255, 0));
-        jLabel48.setText("0");
+        profileGames.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        profileGames.setForeground(new java.awt.Color(51, 255, 0));
+        profileGames.setText("0");
 
-        jLabel49.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(0, 255, 0));
-        jLabel49.setText("0");
+        profileWins.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        profileWins.setForeground(new java.awt.Color(0, 255, 0));
+        profileWins.setText("0");
 
-        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(51, 255, 0));
-        jLabel50.setText("0");
+        profileLose.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        profileLose.setForeground(new java.awt.Color(51, 255, 0));
+        profileLose.setText("0");
+
+        btnProfileBack.setFont(new java.awt.Font("Tempus Sans ITC", 3, 48)); // NOI18N
+        btnProfileBack.setText("back");
+        btnProfileBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnProfileBackMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1081,32 +1066,35 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 .addGap(194, 194, 194)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addGap(192, 192, 192)
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel38)
                             .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 235, Short.MAX_VALUE))))
+                            .addComponent(ProfileUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(profileUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 235, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnProfileBack, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel39)
+                                .addGap(192, 192, 192)
+                                .addComponent(jLabel40)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(167, 167, 167))))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(233, 233, 233)
-                .addComponent(jLabel48)
+                .addComponent(profileGames)
                 .addGap(319, 319, 319)
-                .addComponent(jLabel49)
+                .addComponent(profileWins)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel50)
+                .addComponent(profileLose)
                 .addGap(226, 226, 226))
         );
         jPanel7Layout.setVerticalGroup(
@@ -1117,11 +1105,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ProfileUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profileUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1133,11 +1121,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
                     .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel48)
+                    .addComponent(profileGames)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel49)
-                        .addComponent(jLabel50)))
-                .addContainerGap(230, Short.MAX_VALUE))
+                        .addComponent(profileWins)
+                        .addComponent(profileLose)))
+                .addGap(59, 59, 59)
+                .addComponent(btnProfileBack, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel7, "card7");
@@ -1277,16 +1267,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         drawlable.setForeground(new java.awt.Color(255, 255, 102));
         drawlable.setText("0");
 
-        jLabel53.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
-        jLabel53.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel53.setText("Player Profile");
-
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -1337,27 +1317,15 @@ public class TicTacToeClient extends javax.swing.JFrame {
                                 .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(317, 317, 317)
-                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel53)))
+                        .addGap(447, 447, 447)
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel53)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(81, 81, 81)
+                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
@@ -1435,20 +1403,47 @@ public class TicTacToeClient extends javax.swing.JFrame {
           try {
             // TODO add your handling code here:
             success=dataInputStream.readBoolean();
+           
             System.out.println(success);
         } catch (IOException ex) {
             Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if(success){
+           try {
+               playerEmail=dataInputStream.readUTF();
+               playerName= dataInputStream.readUTF();
+               playerGames=dataInputStream.readInt();
+               playerWins=dataInputStream.readInt();
+               playerLoses=dataInputStream.readInt();
+             
+           } catch (IOException ex) {
+               Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+           }
+          
             JOptionPane.showMessageDialog(null, "Logged in Succcessfully");
          CardLayout card=(CardLayout)mycards.getLayout();
         for(int i=0;i<2;i++){
           card.next(mycards);
+          
         }
+        ProfileUserName.setText(playerName);
+        profileUserEmail.setText(playerEmail);
+        profileGames.setText(""+playerGames);
+        profileWins.setText(""+playerWins);
+        profileLose.setText(""+playerLoses);
+              
+                    
+                    
+                            
+                            
+                          
+           
+               
+        
         
         }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
-       // card.last(mycards);
+       
     }//GEN-LAST:event_signinLabelMousePressed
 
     private void signPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signPassActionPerformed
@@ -1491,7 +1486,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }//GEN-LAST:event_offlineLabelMousePressed
 
     private void signUpScreenLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpScreenLabelMousePressed
-        try {      
+            
             // TODO add your handling code here:
             
             // TODO add your handling code here:
@@ -1499,20 +1494,27 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String userName = signUserName.getText().trim();
             String password = signPass.getText().trim();
             String confirmPass = confPass.getText().trim();
-            String key=signUpScreenLabel.getText();
-            dataOutputStream.writeUTF(key);
-            dataOutputStream.writeUTF(userName);
-            dataOutputStream.writeUTF(email);
-            dataOutputStream.writeUTF(password);
-            success=dataInputStream.readBoolean();
-            if(success){
-                JOptionPane.showMessageDialog(null, "registered successfully");
-                CardLayout card=(CardLayout)mycards.getLayout();
-                card.next(mycards);
-            } else  JOptionPane.showMessageDialog(null, "unsuccessfull regestration review your data and try again");
-        } catch (IOException ex) {
-            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            String key =signUpScreenLabel.getText();
+            if(password.equals(confirmPass)){
+                
+                try {
+                    dataOutputStream.writeUTF(key);
+                    dataOutputStream.writeUTF(userName);
+                    dataOutputStream.writeUTF(email);
+                    dataOutputStream.writeUTF(password);
+                    success=dataInputStream.readBoolean();
+                    if(success){
+                        JOptionPane.showMessageDialog(null, "registered successfully");
+                        CardLayout card=(CardLayout)mycards.getLayout();
+                        card.next(mycards);
+                    } else  JOptionPane.showMessageDialog(null, "Unsuccessfull Regestration Review Your Data and try again");
+                } catch (IOException ex) {
+                    Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        } else  JOptionPane.showMessageDialog(null, "password didn't match try again");
+                
+            
+            
     }//GEN-LAST:event_signUpScreenLabelMousePressed
         
                                          
@@ -1696,18 +1698,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoProfileActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnProfileBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfileBackMousePressed
         // TODO add your handling code here:
         CardLayout card=(CardLayout) mycards.getLayout();
-        card.next(mycards);
-        
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-        CardLayout card=(CardLayout) mycards.getLayout();
-        card.previous(mycards);
-    }//GEN-LAST:event_jButton10ActionPerformed
+         for (int i=0;i<2;i++){
+        card.previous(mycards);}
+    }//GEN-LAST:event_btnProfileBackMousePressed
 
     /**
      * @param args the command line arguments
@@ -1754,6 +1750,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ProfileUserName;
+    private javax.swing.JLabel btnProfileBack;
     private javax.swing.JLabel computerLabel;
     private javax.swing.JPasswordField confPass;
     private javax.swing.JLabel drawcont;
@@ -1764,7 +1762,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel hardLabel;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1772,7 +1769,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1781,7 +1777,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1816,13 +1811,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1837,8 +1827,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lable;
     private javax.swing.JLabel lable222;
     private javax.swing.JButton logoProfile;
@@ -1850,6 +1838,10 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordFeild;
     private javax.swing.JLabel playerO;
     private javax.swing.JLabel playerX;
+    private javax.swing.JLabel profileGames;
+    private javax.swing.JLabel profileLose;
+    private javax.swing.JTextField profileUserEmail;
+    private javax.swing.JLabel profileWins;
     private javax.swing.JButton resetBtn;
     private javax.swing.JTextField signEmail;
     private javax.swing.JPasswordField signPass;
