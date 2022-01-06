@@ -419,7 +419,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Name "/>
+                <Property name="text" type="java.lang.String" value="E-mail"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
@@ -1009,7 +1009,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="cc" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Off line"/>
+                <Property name="text" type="java.lang.String" value="Offline"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="offlineLabelMousePressed"/>
@@ -1485,8 +1485,8 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="lable222" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lable" min="-2" pref="134" max="-2" attributes="0"/>
+                                              <Component id="secondPlayer" min="-2" max="-2" attributes="0"/>
+                                              <Component id="firstPlayer" min="-2" pref="134" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="drawcont" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -1530,7 +1530,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lable" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="firstPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="playerX" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1552,7 +1552,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lable222" min="-2" max="-2" attributes="0"/>
+                                  <Component id="secondPlayer" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" pref="130" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1762,7 +1762,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lable">
+            <Component class="javax.swing.JLabel" name="firstPlayer">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tempus Sans ITC" size="36" style="2"/>
@@ -1773,7 +1773,7 @@
                 <Property name="text" type="java.lang.String" value="Player X"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lable222">
+            <Component class="javax.swing.JLabel" name="secondPlayer">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tempus Sans ITC" size="36" style="2"/>

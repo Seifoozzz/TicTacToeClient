@@ -37,9 +37,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
     Boolean success=false;
     String playerName;
     String playerEmail;
+    String playingMode="";
     int playerGames ;
     int playerWins;
     int playerLoses;
+     String secPlayer;
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
         initComponents();
@@ -73,11 +75,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
         if(flag.equalsIgnoreCase("X"))
         {
             flag = "O";
-            jLabel46.setText(" O turn");
+           // jLabel46.setText(" O turn");
         }else
         {
             flag = "X";
-            jLabel46.setText(" X turn");
+            //jLabel46.setText(" X turn");
         }
             
         
@@ -91,9 +93,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String b3 = arr[r3].getText();
             if(b1.equalsIgnoreCase("X") && b2.equalsIgnoreCase("X") && b3.equalsIgnoreCase("X"))
             {
-                arr[r1].setBackground(Color.red);
-                arr[r2].setBackground(Color.red);
-                arr[r3].setBackground(Color.red);
+                arr[r1].setBackground(Color.green);
+                arr[r2].setBackground(Color.green);
+                arr[r3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player x is win ");
                 xCounter++;
                 gameScore();
@@ -132,9 +134,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String b3 = arr[d3].getText();
             if(b1.equalsIgnoreCase("X") && b2.equalsIgnoreCase("X") && b3.equalsIgnoreCase("X"))
             {
-                arr[d1].setBackground(Color.red);
-                arr[d2].setBackground(Color.red);
-                arr[d3].setBackground(Color.red);
+                arr[d1].setBackground(Color.green);
+                arr[d2].setBackground(Color.green);
+                arr[d3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player x is win ");
                 xCounter++;
                 gameScore();
@@ -156,9 +158,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String b2 = arr[r2].getText();
             String b3 = arr[r3].getText();
             if (b1.equalsIgnoreCase("O") && b2.equalsIgnoreCase("O") && b3.equalsIgnoreCase("O")) {
-                arr[r1].setBackground(Color.red);
-                arr[r2].setBackground(Color.red);
-                arr[r3].setBackground(Color.red);
+                arr[r1].setBackground(Color.green);
+                arr[r2].setBackground(Color.green);
+                arr[r3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player O is win ");
                 oCounter++;
                 gameScore();
@@ -175,9 +177,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String b2 = arr[c2].getText();
             String b3 = arr[c3].getText();
             if (b1.equalsIgnoreCase("O") && b2.equalsIgnoreCase("O") && b3.equalsIgnoreCase("O")) {
-                arr[c1].setBackground(Color.red);
-                arr[c2].setBackground(Color.red);
-                arr[c3].setBackground(Color.red);
+                arr[c1].setBackground(Color.green);
+                arr[c2].setBackground(Color.green);
+                arr[c3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player O is win ");
                 oCounter++;
                 gameScore();
@@ -193,9 +195,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String b2 = arr[d2].getText();
             String b3 = arr[d3].getText();
             if (b1.equalsIgnoreCase("O") && b2.equalsIgnoreCase("O") && b3.equalsIgnoreCase("O")) {
-                arr[d1].setBackground(Color.red);
-                arr[d2].setBackground(Color.red);
-                arr[d3].setBackground(Color.red);
+                arr[d1].setBackground(Color.green);
+                arr[d2].setBackground(Color.green);
+                arr[d3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player O is win ");
                 oCounter++;
                 gameScore();
@@ -321,8 +323,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
         newGameBtn = new javax.swing.JButton();
         resetBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
-        lable = new javax.swing.JLabel();
-        lable222 = new javax.swing.JLabel();
+        firstPlayer = new javax.swing.JLabel();
+        secondPlayer = new javax.swing.JLabel();
         drawcont = new javax.swing.JLabel();
         playerX = new javax.swing.JLabel();
         playerO = new javax.swing.JLabel();
@@ -478,7 +480,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Name ");
+        jLabel13.setText("E-mail");
 
         jLabel14.setFont(new java.awt.Font("Tempus Sans ITC", 0, 48)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -823,7 +825,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
         offlineLabel.setFont(new java.awt.Font("Chiller", 2, 48)); // NOI18N
         offlineLabel.setForeground(new java.awt.Color(204, 204, 255));
-        offlineLabel.setText("Off line");
+        offlineLabel.setText("Offline");
         offlineLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 offlineLabelMousePressed(evt);
@@ -1243,13 +1245,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
             }
         });
 
-        lable.setFont(new java.awt.Font("Tempus Sans ITC", 2, 36)); // NOI18N
-        lable.setForeground(new java.awt.Color(255, 255, 255));
-        lable.setText("Player X");
+        firstPlayer.setFont(new java.awt.Font("Tempus Sans ITC", 2, 36)); // NOI18N
+        firstPlayer.setForeground(new java.awt.Color(255, 255, 255));
+        firstPlayer.setText("Player X");
 
-        lable222.setFont(new java.awt.Font("Tempus Sans ITC", 2, 36)); // NOI18N
-        lable222.setForeground(new java.awt.Color(255, 255, 255));
-        lable222.setText("Player O");
+        secondPlayer.setFont(new java.awt.Font("Tempus Sans ITC", 2, 36)); // NOI18N
+        secondPlayer.setForeground(new java.awt.Color(255, 255, 255));
+        secondPlayer.setText("Player O");
 
         drawcont.setFont(new java.awt.Font("Tempus Sans ITC", 2, 36)); // NOI18N
         drawcont.setForeground(new java.awt.Color(204, 255, 204));
@@ -1303,8 +1305,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lable222)
-                                        .addComponent(lable, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(secondPlayer)
+                                        .addComponent(firstPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(drawcont))
                                 .addGap(44, 44, 44)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1337,7 +1339,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lable)
+                                    .addComponent(firstPlayer)
                                     .addComponent(playerX))
                                 .addGap(18, 18, 18)
                                 .addComponent(playerO)))
@@ -1353,7 +1355,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lable222)
+                            .addComponent(secondPlayer)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1432,15 +1434,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         profileGames.setText(""+playerGames);
         profileWins.setText(""+playerWins);
         profileLose.setText(""+playerLoses);
-              
-                    
-                    
-                            
-                            
-                          
-           
-               
-        
         
         }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
        
@@ -1479,9 +1472,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
     private void offlineLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_offlineLabelMousePressed
         // TODO add your handling code here:
+       
+        
+       secPlayer = JOptionPane.showInputDialog("please enter the second player name ?");
          CardLayout card=(CardLayout)mycards.getLayout();
          card.last(mycards);
-         
+         playingMode=offlineLabel.getText();
+         secondPlayer.setText(secPlayer);
+         firstPlayer.setText(playerName);
         
     }//GEN-LAST:event_offlineLabelMousePressed
 
@@ -1504,13 +1502,24 @@ public class TicTacToeClient extends javax.swing.JFrame {
                     dataOutputStream.writeUTF(password);
                     success=dataInputStream.readBoolean();
                     if(success){
+                      playerEmail=dataInputStream.readUTF();
+                      playerName= dataInputStream.readUTF();
+                      playerGames=dataInputStream.readInt();
+                      playerWins=dataInputStream.readInt();
+                      playerLoses=dataInputStream.readInt();
                         JOptionPane.showMessageDialog(null, "registered successfully");
                         CardLayout card=(CardLayout)mycards.getLayout();
                         card.next(mycards);
+                          
                     } else  JOptionPane.showMessageDialog(null, "Unsuccessfull Regestration Review Your Data and try again");
                 } catch (IOException ex) {
                     Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                ProfileUserName.setText(playerName);
+                profileUserEmail.setText(playerEmail);
+                profileGames.setText(""+playerGames);
+                profileWins.setText(""+playerWins);
+                profileLose.setText(""+playerLoses);
         } else  JOptionPane.showMessageDialog(null, "password didn't match try again");
                 
             
@@ -1549,15 +1558,29 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
+        xCounter =0;
+        oCounter = 0;
+        draw = 0;
+        gameScore();
+         for(int x = 0; x <9; x++ )
+        {
+            arr[x].setText("");
+            arr[x].setEnabled(true);
+            arr[x].setBackground(Color.LIGHT_GRAY);
+        }
+         secondPlayer.setText("player O");
+         firstPlayer.setText("Player X");
         CardLayout card=(CardLayout)mycards.getLayout();
         for(int i=0;i<3;i++){
           card.next(mycards);
         }
+        playingMode="";
         
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
         // TODO add your handling code here:
+        if(playingMode.equals("Offline")){
         String s = jButton0.getText();
         if(s.equalsIgnoreCase(""))
         {
@@ -1566,10 +1589,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(playingMode.equals("Offline")){
         String s = jButton3.getText();
         if(s.equalsIgnoreCase(""))
         {
@@ -1578,11 +1604,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         String s = jButton1.getText();
+         if(playingMode.equals("Offline")){
+        String s = jButton1.getText();
         if(s.equalsIgnoreCase(""))
         {
             jButton1.setText(flag);
@@ -1590,10 +1619,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(playingMode.equals("Offline")){
         String s = jButton2.getText();
         if(s.equalsIgnoreCase(""))
         {
@@ -1602,11 +1634,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         String s = jButton4.getText();
+         if(playingMode.equals("Offline")){
+        String s = jButton4.getText();
         if(s.equalsIgnoreCase(""))
         {
             jButton4.setText(flag);
@@ -1614,11 +1649,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-         String s = jButton5.getText();
+          if(playingMode.equals("Offline")){
+        String s = jButton5.getText();
         if(s.equalsIgnoreCase(""))
         {
             jButton5.setText(flag);
@@ -1626,11 +1664,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-         String s = jButton6.getText();
+         if(playingMode.equals("Offline")){
+        String s = jButton6.getText();
         if(s.equalsIgnoreCase(""))
         {
             jButton6.setText(flag);
@@ -1638,10 +1679,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        if(playingMode.equals("Offline")){
         String s = jButton7.getText();
         if(s.equalsIgnoreCase(""))
         {
@@ -1650,11 +1694,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-         String s = jButton8.getText();
+         if(playingMode.equals("Offline")){
+        String s = jButton8.getText();
         if(s.equalsIgnoreCase(""))
         {
             jButton8.setText(flag);
@@ -1662,12 +1709,15 @@ public class TicTacToeClient extends javax.swing.JFrame {
             xWin();
             oWin();
         }
+        }
+        else System.out.println("testing...");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         // TODO add your handling code here:
          if(cx && co)
         { 
+            
             draw++;
             drawlable.setText(""+draw);
             cx = false;
@@ -1759,6 +1809,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel easyLabel;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton exitBtn;
+    private javax.swing.JLabel firstPlayer;
     private javax.swing.JLabel hardLabel;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
@@ -1827,8 +1878,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lable;
-    private javax.swing.JLabel lable222;
     private javax.swing.JButton logoProfile;
     private javax.swing.JLabel mediumLabel;
     private javax.swing.JPanel mycards;
@@ -1843,6 +1892,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JTextField profileUserEmail;
     private javax.swing.JLabel profileWins;
     private javax.swing.JButton resetBtn;
+    private javax.swing.JLabel secondPlayer;
     private javax.swing.JTextField signEmail;
     private javax.swing.JPasswordField signPass;
     private javax.swing.JLabel signUpLabel;

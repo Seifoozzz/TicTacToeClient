@@ -48,8 +48,7 @@ public class NewJFrame extends javax.swing.JFrame {
                
                 jfxPanel.setScene(new Scene(new Group(new MediaView(m))));
                 m.setVolume(0.7);
-                m.setCycleCount(1);
-                
+                m.setCycleCount(1);                
                 m.play();
                 
             }
@@ -68,6 +67,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
