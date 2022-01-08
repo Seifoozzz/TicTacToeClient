@@ -41,7 +41,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     int playerGames ;
     int playerWins;
     int playerLoses;
-     String secPlayer;
+    String secPlayer;
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
         initComponents();
@@ -286,7 +286,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         offlineLabel = new javax.swing.JLabel();
         computerLabel = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
-        logoProfile = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         easyLabel = new javax.swing.JLabel();
         mediumLabel = new javax.swing.JLabel();
@@ -845,10 +844,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(102, 102, 0));
         jLabel52.setText("Your Profile  ");
-
-        logoProfile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoProfileActionPerformed(evt);
+        jLabel52.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel52MousePressed(evt);
             }
         });
 
@@ -878,8 +876,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGap(62, 62, 62)
-                            .addComponent(logoProfile)
-                            .addGap(322, 322, 322)
                             .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(334, 334, 334)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -896,9 +892,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jLabel52)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logoProfile)))
+                        .addComponent(jLabel52)))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
@@ -970,7 +964,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(easyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(316, 316, 316))
+                .addGap(368, 368, 368))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -979,37 +973,37 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel44))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(410, 410, 410)
+                        .addGap(422, 422, 422)
                         .addComponent(jLabel43))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(365, 365, 365)
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel44))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(364, 364, 364)
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(457, 457, 457)
+                        .addGap(456, 456, 456)
                         .addComponent(mediumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(174, 174, 174)
+                .addGap(119, 119, 119)
                 .addComponent(jLabel43)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel44)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
+                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addComponent(easyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(36, 36, 36)
                 .addComponent(mediumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(hardLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel5, "card5");
@@ -1740,20 +1734,20 @@ public class TicTacToeClient extends javax.swing.JFrame {
         gameScore();
     }//GEN-LAST:event_newGameBtnActionPerformed
 
-    private void logoProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoProfileActionPerformed
-        // TODO add your handling code here:
-        CardLayout card=(CardLayout) mycards.getLayout();
-        for (int i=0;i<2;i++){
-        card.next(mycards);
-        }
-    }//GEN-LAST:event_logoProfileActionPerformed
-
     private void btnProfileBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfileBackMousePressed
         // TODO add your handling code here:
         CardLayout card=(CardLayout) mycards.getLayout();
          for (int i=0;i<2;i++){
         card.previous(mycards);}
     }//GEN-LAST:event_btnProfileBackMousePressed
+
+    private void jLabel52MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel52MousePressed
+        // TODO add your handling code here:
+        CardLayout card=(CardLayout) mycards.getLayout();
+        for (int i=0;i<2;i++){
+        card.next(mycards);
+        }
+    }//GEN-LAST:event_jLabel52MousePressed
 
     /**
      * @param args the command line arguments
@@ -1878,7 +1872,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton logoProfile;
     private javax.swing.JLabel mediumLabel;
     private javax.swing.JPanel mycards;
     private javax.swing.JButton newGameBtn;
