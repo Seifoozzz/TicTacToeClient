@@ -1590,6 +1590,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
     private void signinLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinLabelMousePressed
         // TODO add your handling code here:
+
        try {
             String email = emailField.getText().trim();
             String password = passwordFeild.getText().trim();
@@ -1635,6 +1636,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
         profileLose.setText(""+playerLoses);
         
         }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+
+
        
     }//GEN-LAST:event_signinLabelMousePressed
 
