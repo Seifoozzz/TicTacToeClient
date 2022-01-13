@@ -32,7 +32,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     static Socket socket;
     static DataInputStream dataInputStream;
     static DataOutputStream dataOutputStream;
-    
+    LocalDataBase base = new LocalDataBase();
     String flag = "X"; //string to swap between x , o
     int xCounter = 0;  // int value to count the number of winning game to player x
     int oCounter =0;   //int value to count the number of winning game to player o
@@ -49,6 +49,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
     String playerName;
     String playerEmail;
     String playingMode="";
+    String easy ="";
+    String hard ="";
+    String medium="";
     int computerco=0;
     int playerGames ;
     int playerWins;
@@ -118,6 +121,20 @@ public class TicTacToeClient extends javax.swing.JFrame {
         
         
     }
+     public void recordGameHard()
+    {
+           
+            System.out.println("inside");
+           
+           jButton9.setText("record game");
+           jButton9.setBackground(Color.LIGHT_GRAY);
+            record = false;
+           dataLocl = LocalDataBase.readLocalFile(localFile);
+            System.out.println(dataLocl+"the line inside recordGame");
+        
+        
+    }
+    
     public boolean isDraw()
     {
         if(drawCount<8)
@@ -1734,6 +1751,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        easy = easyLabel.getText();
     }//GEN-LAST:event_easyLabelMousePressed
 
     private void mediumLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mediumLabelMousePressed
@@ -1741,6 +1759,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        medium = mediumLabel.getText();
     }//GEN-LAST:event_mediumLabelMousePressed
 
     private void hardLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hardLabelMousePressed
@@ -1748,26 +1767,48 @@ CardLayout card=(CardLayout)mycards.getLayout();
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        hard = hardLabel.getText();
     }//GEN-LAST:event_hardLabelMousePressed
 
     private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
         // TODO add your handling code here:
          CardLayout card=(CardLayout)mycards.getLayout();
         card.previous(mycards);
+        easy ="";
+        hard ="";
+        medium="";
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
-        xCounter =0;
+      xCounter =0;
         oCounter = 0;
         draw = 0;
+        drawCount = 0;
         gameScore();
-         for(int x = 0; x <9; x++ )
+        base.comInd = -1;
+
+        base.is_loss = false;
+        base.is_win = false;
+        base.is_full = false;
+        
+        for (int i = 0; i < 9; i++) {
+            base.mnmx.xo[i] = "0";
+
+        }
+        
+        flag = "X";
+        computerco =0;
+        end = false;
+       
+         
+        for(int x = 0; x <9; x++ )
         {
             arr[x].setText("");
             arr[x].setEnabled(true);
             arr[x].setBackground(Color.LIGHT_GRAY);
         }
+        moves.clear();
          secondPlayer.setText("player O");
          firstPlayer.setText("Player X");
         CardLayout card=(CardLayout)mycards.getLayout();
@@ -1780,6 +1821,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
         // TODO add your handling code here:
+        int n = 0;
         if(playingMode.equals("Offline")){
         String s = jButton0.getText();
         if(s.equalsIgnoreCase(""))
@@ -1794,7 +1836,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else{
-            String s = jButton0.getText();
+            if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+            {
+                String s = jButton0.getText();
             
         if(s.equalsIgnoreCase(""))
         {
@@ -1813,11 +1857,47 @@ CardLayout card=(CardLayout)mycards.getLayout();
             isDrawComputer();
            
         }
+            }else if(hard.equalsIgnoreCase("hard")){
+        
+            base.playclick(jButton0, arr, n, record, moves );
+            
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                recordGameHard();
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =firstPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                recordGameHard();
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                recordGameHard();
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+            }
+            }
+        }
+            
         }
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int n = 3;
         if(playingMode.equals("Offline")){
         String s = jButton3.getText();
         if(s.equalsIgnoreCase(""))
@@ -1833,7 +1913,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         else 
         {
-            String s = jButton3.getText();
+            if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+            {
+                String s = jButton3.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -1850,12 +1932,48 @@ CardLayout card=(CardLayout)mycards.getLayout();
             isDrawComputer();
             
         }
+            }else if(hard.equalsIgnoreCase("hard")){
+            
+                base.playclick(jButton3, arr,n, record, moves );
+                
+             if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                recordGameHard();
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =firstPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                recordGameHard();
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                recordGameHard();
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+            }
+            }
+            }
+            
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int n = 1;
          if(playingMode.equals("Offline")){
         String s = jButton1.getText();
         if(s.equalsIgnoreCase(""))
@@ -1871,7 +1989,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         else
          {
-             String s = jButton1.getText();
+             if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+             {
+                 String s = jButton1.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -1888,11 +2008,49 @@ CardLayout card=(CardLayout)mycards.getLayout();
             isDrawComputer();
          
         }
+             }else if(hard.equalsIgnoreCase("hard")){
+            base.playclick(jButton1, arr, n, record, moves );
+            
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+        }
+             
          }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int n = 2;
         if(playingMode.equals("Offline")){
         String s = jButton2.getText();
         if(s.equalsIgnoreCase(""))
@@ -1907,7 +2065,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else{
-            String s = jButton2.getText();
+            if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+            {
+                String s = jButton2.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -1924,11 +2084,52 @@ CardLayout card=(CardLayout)mycards.getLayout();
             isDrawComputer();
           
         }
+            }else if(hard.equalsIgnoreCase("hard")){
+            base.playclick(jButton2, arr, n, record, moves );
+            
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =firstPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            
+        }
+            
+            
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        System.out.print(hard);
+        int n = 4;
          if(playingMode.equals("Offline")){
         String s = jButton4.getText();
         if(s.equalsIgnoreCase(""))
@@ -1943,7 +2144,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else {
-             String s = jButton4.getText();
+             if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+             {
+                 String s = jButton4.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -1960,11 +2163,50 @@ CardLayout card=(CardLayout)mycards.getLayout();
            isDrawComputer();
           
         }
+             }else if(hard.equalsIgnoreCase("hard")){
+                 System.out.print("inside hard");
+                 base.playclick(jButton4, arr, n, record, moves );
+            
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+             }
+             
          }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        int n = 5;
           if(playingMode.equals("Offline")){
         String s = jButton5.getText();
         if(s.equalsIgnoreCase(""))
@@ -1979,7 +2221,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else {
-              String s = jButton5.getText();
+              if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+              {
+                  String s = jButton5.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -1999,11 +2243,49 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             
         }
+              }else if(hard.equalsIgnoreCase("hard")){
+            base.playclick(jButton5, arr, n, record, moves );
+           
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =firstPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                  if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+               }
+              
           }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        int n = 6;
          if(playingMode.equals("Offline")){
         String s = jButton6.getText();
         if(s.equalsIgnoreCase(""))
@@ -2018,7 +2300,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else {
-             String s = jButton6.getText();
+             if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+             {
+                 String s = jButton6.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -2035,11 +2319,50 @@ CardLayout card=(CardLayout)mycards.getLayout();
            isDrawComputer();
            
         }
+             }else if(hard.equalsIgnoreCase("hard")){
+            base.playclick(jButton6, arr, n, record, moves );
+            
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+                
+        }
+             
          }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        int n = 7;
         if(playingMode.equals("Offline")){
         String s = jButton7.getText();
         if(s.equalsIgnoreCase(""))
@@ -2054,7 +2377,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else {
-            String s = jButton7.getText();
+            if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+            {
+                 String s = jButton7.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -2071,11 +2396,49 @@ CardLayout card=(CardLayout)mycards.getLayout();
             isDrawComputer();
             
         }
+            }else if(hard.equalsIgnoreCase("hard")){
+                base.playclick(jButton7, arr, n, record, moves );
+                
+            if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =firstPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            }
+           
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        int n = 8;
          if(playingMode.equals("Offline")){
         String s = jButton8.getText();
         if(s.equalsIgnoreCase(""))
@@ -2090,7 +2453,9 @@ CardLayout card=(CardLayout)mycards.getLayout();
         }
         }
         else {
-             String s = jButton8.getText();
+             if(easy.equalsIgnoreCase("easy")||medium.equalsIgnoreCase("medium"))
+             {
+                 String s = jButton8.getText();
         if(s.equalsIgnoreCase(""))
         {
             
@@ -2107,11 +2472,60 @@ CardLayout card=(CardLayout)mycards.getLayout();
            isDrawComputer();
          
         }
+             }else if(hard.equalsIgnoreCase("hard"))
+             {
+                 base.playclick(jButton8, arr, n, record, moves );
+                 
+                 if(base.is_win)
+            {
+                String s =secondPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_loss)
+            {
+                String s =firstPlayer.getText();
+                JOptionPane.showMessageDialog(this, "player "+s+" is win");
+                if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+            if(base.is_full)
+            {
+                 JOptionPane.showMessageDialog(this, "the game is Draw please try again");
+                 if(record)
+            {
+                
+                LocalDataBase.writeLocalGameSteps(localFile, dataLocl, playerX00, base.mnmx.Score, playerX00, base.mnmx.oppScore, moves, winner);
+                recordGameHard();
+            }
+            }
+             }
+             
          }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         // TODO add your handling code here:
+        base.comInd = -1;
+
+        base.is_loss = false;
+        base.is_win = false;
+        base.is_full = false;
+        
+        for (int i = 0; i < 9; i++) {
+            base.mnmx.xo[i] = "0";
+
+        }
+        
         flag = "X";
         computerco =0;
         end = false;
@@ -2139,7 +2553,31 @@ CardLayout card=(CardLayout)mycards.getLayout();
         xCounter =0;
         oCounter = 0;
         draw = 0;
+        drawCount = 0;
         gameScore();
+            base.comInd = -1;
+
+        base.is_loss = false;
+        base.is_win = false;
+        base.is_full = false;
+        
+        for (int i = 0; i < 9; i++) {
+            base.mnmx.xo[i] = "0";
+
+        }
+        
+        flag = "X";
+        computerco =0;
+        end = false;
+       
+         
+        for(int x = 0; x <9; x++ )
+        {
+            arr[x].setText("");
+            arr[x].setEnabled(true);
+            arr[x].setBackground(Color.LIGHT_GRAY);
+        }
+        moves.clear();
     }//GEN-LAST:event_newGameBtnActionPerformed
 
     private void btnProfileBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfileBackMousePressed

@@ -43,11 +43,12 @@ public class NewJFrame extends javax.swing.JFrame  {
         public void run() {
             File f = new File(vidoe);
                  m = new MediaPlayer(new Media(f.toURI().toString()));
-               
-                jfxPanel.setScene(new Scene(new Group(new MediaView(m))));
+              
+                   jfxPanel.setScene(new Scene(new Group(new MediaView(m))));
                 m.setVolume(0.7);
                 m.setCycleCount(1);                
                 m.play();
+           
             
         }
     });
@@ -70,7 +71,11 @@ public class NewJFrame extends javax.swing.JFrame  {
         
         setSize(500,350);
         setLocationRelativeTo(null);
-        Platform.runLater(s);
+        
+                    Platform.runLater(s);
+
+        
+       
     }
 
     /**
@@ -125,7 +130,7 @@ public class NewJFrame extends javax.swing.JFrame  {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         m.stop();
-        s.stop();
+        
     }//GEN-LAST:event_formWindowClosing
 
     /**

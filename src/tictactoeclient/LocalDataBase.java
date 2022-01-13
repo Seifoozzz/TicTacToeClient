@@ -17,7 +17,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -29,6 +32,10 @@ public class LocalDataBase {
     public static FileOutputStream lowOut;
     public static DataInputStream highInput;
     public static DataOutputStream highOutput;
+    MinMax mnmx = new MinMax();
+    
+    int comInd =0;
+    boolean is_loss, is_win, is_full;
     //public static File localFile;
     //
     public LocalDataBase() {
@@ -157,4 +164,88 @@ public class LocalDataBase {
         
     }
 }
+    public void playclick(JButton btn,JButton arr[], int index, boolean record, LinkedHashMap<Integer, String> moves) {
+       System.out.print("inside playclick");
+             String var = btn.getText();
+        if (var.equalsIgnoreCase("")) {
+            btn.setText(mnmx.sgm);
+            System.out.print("the index"+index);
+            mnmx.xo[index] = btn.getText();
+            moves.put(index, mnmx.sgm);
+        }
+        
+        if (mnmx.isWin()) {
+            mnmx.oppScore++;
+            
+            is_win = true;
+           for(int x = 0; x <9; x++ )
+        {
+            arr[x].setEnabled(false);
+        }
+            System.out.println("Good luck Ai is win ,You loss the game ");
+
+        }
+        if (mnmx.isLoss()) {
+            mnmx.Score += 1;
+            
+            for(int x = 0; x <9; x++ )
+           {
+            arr[x].setEnabled(false);
+           }
+            
+
+            is_loss = true;
+           
+            System.out.println("Congratulations,You wine the game!");
+        }
+        if (mnmx.isFull()) {
+
+           mnmx. tieScore++;
+            
+            for(int x = 0; x <9; x++ )
+        {
+            arr[x].setEnabled(false);
+        }
+            
+
+            is_full = true;
+            
+            System.out.println("You and your opponent are tied ");
+        }
+        if (!is_full && !is_loss && !is_win) {
+            
+         
+                comInd = mnmx.minimax();    
+             System.out.println("value of comInd "+comInd);
+          System.out.println(comInd+"");
+            mnmx.xo[comInd] = mnmx.oppSgm;
+          
+            for(int x = 0; x<arr.length; x++)
+            {
+                
+                if (comInd == x) {
+                arr[x].setText(mnmx.oppSgm);
+               System.out.println("the singn "+mnmx.oppSgm);
+
+                moves.put(x, mnmx.oppSgm);
+
+            }
+            }
+            
+
+            if (mnmx.isWin()) {
+                mnmx.oppScore++;
+               
+               for(int x = 0; x <9; x++ )
+               {
+                 arr[x].setEnabled(false);
+               }
+
+                is_win = true;
+               
+                System.out.println("Good luck Ai is win ,You loss the game ");
+
+            }
+        }
+    }
 }
