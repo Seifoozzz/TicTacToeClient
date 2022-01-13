@@ -7,6 +7,9 @@ package tictactoeclient;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,6 +17,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,7 +45,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     int playerGames ;
     int playerWins;
     int playerLoses;
-     String secPlayer;
+    String secPlayer;
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
         initComponents();
@@ -1397,6 +1401,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
             String password = passwordFeild.getText().trim();
             String key=signinLabel.getText();
             dataOutputStream.writeUTF(key);
+            System.out.println(key);
             dataOutputStream.writeUTF(email);
             dataOutputStream.writeUTF(password);        // TODO add your handling code here:
         } catch (IOException ex) {
@@ -1464,16 +1469,40 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }//GEN-LAST:event_computerLabelMousePressed
 
     private void onlineLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onlineLabelMousePressed
-        // TODO add your handling code here:
-       CardLayout card=(CardLayout)mycards.getLayout();
-       card.last(mycards);
+        //try {
+            // TODO add your handling code here:
+         /*  String label = onlineLabel.getText();
+        try {
+            //dataOutputStream.writeUTF("ready");
+            dataOutputStream.writeUTF("ready");
+        } catch (IOException ex) {
+            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            CardLayout card=(CardLayout)mycards.getLayout();
+            card.last(mycards);*/
+            
+          new online().setVisible(true);
+            
+        //} catch (IOException ex) {
+           // Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+       // }
        
     }//GEN-LAST:event_onlineLabelMousePressed
 
     private void offlineLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_offlineLabelMousePressed
         // TODO add your handling code here:
+       this.setVisible(false);
+       JFrame j = new NewJFrame();
+       j.setVisible(true);
        
-        
+       j.addWindowListener(new WindowAdapter() {
+           @Override
+           public void windowClosed(WindowEvent e) {
+               TicTacToeClient.this.setVisible(true);
+           }
+
+       });
+       
        secPlayer = JOptionPane.showInputDialog("please enter the second player name ?");
          CardLayout card=(CardLayout)mycards.getLayout();
          card.last(mycards);
