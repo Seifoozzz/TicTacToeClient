@@ -9,8 +9,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -25,23 +27,34 @@ public class TicTacToeClient extends javax.swing.JFrame {
     /**
      * Creates new form TicTacToeClient
      */
+    public static File localFile;
+    public static  String dataLocl;
     static Socket socket;
     static DataInputStream dataInputStream;
     static DataOutputStream dataOutputStream;
+    
     String flag = "X"; //string to swap between x , o
     int xCounter = 0;  // int value to count the number of winning game to player x
     int oCounter =0;   //int value to count the number of winning game to player o
     int draw =0;
+    int drawCount=0;
     boolean cx = false;
     boolean co = false;
+    String playerX00;
+    String playerY00;
+    String winner ="";
+    boolean record = false;
     Boolean success=false;
+    boolean end=false;
     String playerName;
     String playerEmail;
     String playingMode="";
+    int computerco=0;
     int playerGames ;
     int playerWins;
     int playerLoses;
     String secPlayer;
+    LinkedHashMap<Integer, String> moves = new LinkedHashMap<>();
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
         initComponents();
@@ -61,17 +74,86 @@ public class TicTacToeClient extends javax.swing.JFrame {
             
             arr[x].setBackground(Color.LIGHT_GRAY);
         }
+        
+        
+        for(int x = 0; x <9; x++ )
+        {
+            arr[x].setText("");
+        }
+              try {
+            
+            localFile = new File("local.txt");
+            if(localFile.createNewFile())
+            {
+                System.out.println("file created "+ localFile.getName()+ localFile.getPath());
+            }
+            else
+            {
+                System.out.println("the file is already existed");
+            }
+            
+            System.out.println("length: "+ localFile.length());
+            } catch (IOException ex) {
+            Logger.getLogger(LocalDataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+              secondPlayer.setText("Computer");
     }
     // method to reset the score of two players
     public void gameScore()
     {
         playerX.setText(""+xCounter);
         playerO.setText(""+oCounter);
+        
     }// end method gameScore 
+    public void recordGame()
+    {
+           
+            System.out.println("inside");
+            LocalDataBase.fillMap(moves, arr);
+           jButton9.setText("record game");
+           jButton9.setBackground(Color.LIGHT_GRAY);
+            record = false;
+           dataLocl = LocalDataBase.readLocalFile(localFile);
+            System.out.println(dataLocl+"the line inside recordGame");
+        
+        
+    }
+    public boolean isDraw()
+    {
+        if(drawCount<8)
+        {
+            drawCount++;
+            System.out.print(""+drawCount);
+            return false;
+        }else
+        {
+            System.out.println(""+cx+""+co);
+            if(cx&&co)
+            {
+                closeButtons();
+                JOptionPane.showMessageDialog(this, "the game is draw try again ");
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
+                return true;
+            }
+        }
+        return false;
+        
+    }
+  
     
     
      public void choose_player()
     {
+        
+        playerX00 = firstPlayer.getText();
+        playerY00 = secondPlayer.getText();
+        System.out.println("\n first "+playerX00+"  "+playerY00);
         if(flag.equalsIgnoreCase("X"))
         {
             flag = "O";
@@ -98,10 +180,21 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 arr[r3].setBackground(Color.green);
                 JOptionPane.showMessageDialog(this, "Player x is win ");
                 xCounter++;
+                winner =firstPlayer.getText();
                 gameScore();
                 closeButtons();
                 cx = false;
-                new NewJFrame().setVisible(true);
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane(playingMode,"x");
+                framVidoe.setDefaultCloseOperation(2);
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
                 return true;
                 
             }// end if
@@ -122,7 +215,18 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 gameScore();
                 closeButtons();
                 cx = false;
-                new NewJFrame().setVisible(true);
+                winner =firstPlayer.getText();
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane(playingMode,"x");
+                framVidoe.setDefaultCloseOperation(2);
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
                 return true;
             }// end if
             
@@ -141,8 +245,19 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 xCounter++;
                 gameScore();
                 closeButtons();
+                winner =firstPlayer.getText();
                 cx = false;
-                new NewJFrame().setVisible(true);
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane(playingMode,"x");
+                framVidoe.setDefaultCloseOperation(2);
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
               return true;
             }// end if
             
@@ -166,7 +281,18 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 gameScore();
                 closeButtons();
                 co = false;
-                new NewJFrame().setVisible(true);
+                winner =secondPlayer.getText();
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane(playingMode,"o");
+                framVidoe.setDefaultCloseOperation(2);
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
                 return true;
                  
             }// end if
@@ -184,8 +310,19 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 oCounter++;
                 gameScore();
                 closeButtons();
+                winner =secondPlayer.getText();
                 co = false;
-                new NewJFrame().setVisible(true);
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane(playingMode,"o");
+                framVidoe.setDefaultCloseOperation(2);
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
                 return true;
             }// end if
             
@@ -202,8 +339,19 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 oCounter++;
                 gameScore();
                 closeButtons();
+                winner =secondPlayer.getText();
                 co = false;
-                new NewJFrame().setVisible(true);
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane(playingMode,"o");
+                framVidoe.setDefaultCloseOperation(2);
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
                 return true;
                 
             }// end if
@@ -328,6 +476,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
         playerX = new javax.swing.JLabel();
         playerO = new javax.swing.JLabel();
         drawlable = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1263,6 +1413,22 @@ public class TicTacToeClient extends javax.swing.JFrame {
         drawlable.setForeground(new java.awt.Color(255, 255, 102));
         drawlable.setText("0");
 
+        jButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton9.setText("Record");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton10.setText("History");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -1297,24 +1463,31 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addGap(132, 132, 132)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(secondPlayer)
-                                        .addComponent(firstPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(drawcont))
-                                .addGap(44, 44, 44)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(playerX)
-                                    .addComponent(playerO)
-                                    .addComponent(drawlable)))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(447, 447, 447)
-                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(586, 586, 586)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(drawcont)
+                                    .addComponent(secondPlayer)
+                                    .addComponent(firstPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(playerX)
+                                    .addComponent(playerO)
+                                    .addComponent(drawlable)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -1324,21 +1497,27 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
+                                .addGap(37, 37, 37)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(firstPlayer)
                                     .addComponent(playerX))
-                                .addGap(18, 18, 18)
-                                .addComponent(playerO)))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(secondPlayer)
+                                    .addComponent(playerO))))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(drawcont)
                             .addComponent(drawlable))
                         .addGap(18, 18, 18)
@@ -1348,9 +1527,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(secondPlayer)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1361,7 +1538,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel8, "card6");
@@ -1386,50 +1563,51 @@ public class TicTacToeClient extends javax.swing.JFrame {
 
     private void signinLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinLabelMousePressed
         // TODO add your handling code here:
-       try {
-            String email = emailField.getText().trim();
-            String password = passwordFeild.getText().trim();
-            String key=signinLabel.getText();
-            dataOutputStream.writeUTF(key);
-            dataOutputStream.writeUTF(email);
-            dataOutputStream.writeUTF(password);        // TODO add your handling code here:
-        } catch (IOException ex) {
-            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          try {
-            // TODO add your handling code here:
-            success=dataInputStream.readBoolean();
-           
-            System.out.println(success);
-        } catch (IOException ex) {
-            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if(success){
-           try {
-               playerEmail=dataInputStream.readUTF();
-               playerName= dataInputStream.readUTF();
-               playerGames=dataInputStream.readInt();
-               playerWins=dataInputStream.readInt();
-               playerLoses=dataInputStream.readInt();
-             
-           } catch (IOException ex) {
-               Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-           }
-          
-            JOptionPane.showMessageDialog(null, "Logged in Succcessfully");
-         CardLayout card=(CardLayout)mycards.getLayout();
-        for(int i=0;i<2;i++){
-          card.next(mycards);
-          
-        }
-        ProfileUserName.setText(playerName);
-        profileUserEmail.setText(playerEmail);
-        profileGames.setText(""+playerGames);
-        profileWins.setText(""+playerWins);
-        profileLose.setText(""+playerLoses);
-        
-        }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+//       try {
+//            String email = emailField.getText().trim();
+//            String password = passwordFeild.getText().trim();
+//            String key=signinLabel.getText();
+//            dataOutputStream.writeUTF(key);
+//            dataOutputStream.writeUTF(email);
+//            dataOutputStream.writeUTF(password);        // TODO add your handling code here:
+//        } catch (IOException ex) {
+//            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//          try {
+//            // TODO add your handling code here:
+//            success=dataInputStream.readBoolean();
+//           
+//            System.out.println(success);
+//        } catch (IOException ex) {
+//            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        if(success){
+//           try {
+//               playerEmail=dataInputStream.readUTF();
+//               playerName= dataInputStream.readUTF();
+//               playerGames=dataInputStream.readInt();
+//               playerWins=dataInputStream.readInt();
+//               playerLoses=dataInputStream.readInt();
+//             
+//           } catch (IOException ex) {
+//               Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+//           }
+//          
+//            JOptionPane.showMessageDialog(null, "Logged in Succcessfully");
+//         CardLayout card=(CardLayout)mycards.getLayout();
+//        for(int i=0;i<2;i++){
+//          card.next(mycards);
+//          
+//        }
+//        ProfileUserName.setText(playerName);
+//        profileUserEmail.setText(playerEmail);
+//        profileGames.setText(""+playerGames);
+//        profileWins.setText(""+playerWins);
+//        profileLose.setText(""+playerLoses);
+//        
+//        }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+          CardLayout card=(CardLayout)mycards.getLayout();
        
     }//GEN-LAST:event_signinLabelMousePressed
 
@@ -1482,39 +1660,41 @@ public class TicTacToeClient extends javax.swing.JFrame {
             // TODO add your handling code here:
             
             // TODO add your handling code here:
-            String email = signEmail.getText().trim();
-            String userName = signUserName.getText().trim();
-            String password = signPass.getText().trim();
-            String confirmPass = confPass.getText().trim();
-            String key =signUpScreenLabel.getText();
-            if(password.equals(confirmPass)){
-                
-                try {
-                    dataOutputStream.writeUTF(key);
-                    dataOutputStream.writeUTF(userName);
-                    dataOutputStream.writeUTF(email);
-                    dataOutputStream.writeUTF(password);
-                    success=dataInputStream.readBoolean();
-                    if(success){
-                      playerEmail=dataInputStream.readUTF();
-                      playerName= dataInputStream.readUTF();
-                      playerGames=dataInputStream.readInt();
-                      playerWins=dataInputStream.readInt();
-                      playerLoses=dataInputStream.readInt();
-                        JOptionPane.showMessageDialog(null, "registered successfully");
-                        CardLayout card=(CardLayout)mycards.getLayout();
+//            String email = signEmail.getText().trim();
+//            String userName = signUserName.getText().trim();
+//            String password = signPass.getText().trim();
+//            String confirmPass = confPass.getText().trim();
+//            String key =signUpScreenLabel.getText();
+//            if(password.equals(confirmPass)){
+//                
+//                try {
+//                    dataOutputStream.writeUTF(key);
+//                    dataOutputStream.writeUTF(userName);
+//                    dataOutputStream.writeUTF(email);
+//                    dataOutputStream.writeUTF(password);
+//                    success=dataInputStream.readBoolean();
+//                    if(success){
+//                      playerEmail=dataInputStream.readUTF();
+//                      playerName= dataInputStream.readUTF();
+//                      playerGames=dataInputStream.readInt();
+//                      playerWins=dataInputStream.readInt();
+//                      playerLoses=dataInputStream.readInt();
+//                        JOptionPane.showMessageDialog(null, "registered successfully");
+//                        CardLayout card=(CardLayout)mycards.getLayout();
+//                        card.next(mycards);
+//                          
+//                    } else  JOptionPane.showMessageDialog(null, "Unsuccessfull Regestration Review Your Data and try again");
+//                } catch (IOException ex) {
+//                    Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                ProfileUserName.setText(playerName);
+//                profileUserEmail.setText(playerEmail);
+//                profileGames.setText(""+playerGames);
+//                profileWins.setText(""+playerWins);
+//                profileLose.setText(""+playerLoses);
+//        } else  JOptionPane.showMessageDialog(null, "password didn't match try again");
+CardLayout card=(CardLayout)mycards.getLayout();
                         card.next(mycards);
-                          
-                    } else  JOptionPane.showMessageDialog(null, "Unsuccessfull Regestration Review Your Data and try again");
-                } catch (IOException ex) {
-                    Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ProfileUserName.setText(playerName);
-                profileUserEmail.setText(playerEmail);
-                profileGames.setText(""+playerGames);
-                profileWins.setText(""+playerWins);
-                profileLose.setText(""+playerLoses);
-        } else  JOptionPane.showMessageDialog(null, "password didn't match try again");
                 
             
             
@@ -1530,18 +1710,21 @@ public class TicTacToeClient extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
+        secondPlayer.setText("Computer");
     }//GEN-LAST:event_easyLabelMousePressed
 
     private void mediumLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mediumLabelMousePressed
         // TODO add your handling code here:
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
+        secondPlayer.setText("Computer");
     }//GEN-LAST:event_mediumLabelMousePressed
 
     private void hardLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hardLabelMousePressed
         // TODO add your handling code here:
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
+        secondPlayer.setText("Computer");
     }//GEN-LAST:event_hardLabelMousePressed
 
     private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
@@ -1578,13 +1761,35 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton0.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton0.setText(flag);
+            moves.put(0, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else{
+            String s = jButton0.getText();
+            
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton0.setText(flag);
+            moves.put(0, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+            
+             end  =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+            
+        }
+        }
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1593,13 +1798,35 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton3.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton3.setText(flag);
+            moves.put(3, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else 
+        {
+            String s = jButton3.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton3.setText(flag);
+            moves.put(3, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+             end  =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+            
+        }
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1608,13 +1835,34 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton1.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton1.setText(flag);
+            moves.put(1, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else
+         {
+             String s = jButton1.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton1.setText(flag);
+            moves.put(1, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+             end =xWin();
+            end=oWin();
+            boolean ddd = isDraw();
+         
+        }
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1623,13 +1871,33 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton2.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton2.setText(flag);
+            moves.put(2, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else{
+            String s = jButton2.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton2.setText(flag);
+            moves.put(2, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+            end =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+          
+        }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1638,13 +1906,33 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton4.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton4.setText(flag);
+            moves.put(4, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else {
+             String s = jButton4.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton4.setText(flag);
+            moves.put(4, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+             end =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+          
+        }
+         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1653,13 +1941,37 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton5.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton5.setText(flag);
+            moves.put(5, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else {
+              String s = jButton5.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton5.setText(flag);
+            moves.put(5, flag);
+            
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+            end =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+          
+            
+            
+            
+        }
+          }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1668,13 +1980,33 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton6.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton6.setText(flag);
+            moves.put(6, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else {
+             String s = jButton6.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton6.setText(flag);
+            moves.put(6, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+             end =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+           
+        }
+         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1683,13 +2015,33 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton7.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton7.setText(flag);
+            moves.put(7, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else {
+            String s = jButton7.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton7.setText(flag);
+            moves.put(7, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+             end =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+            
+        }
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1698,17 +2050,40 @@ public class TicTacToeClient extends javax.swing.JFrame {
         String s = jButton8.getText();
         if(s.equalsIgnoreCase(""))
         {
+            
             jButton8.setText(flag);
+            moves.put(8, flag);
             choose_player();
             xWin();
             oWin();
+            isDraw();
         }
         }
-        else System.out.println("testing...");
+        else {
+             String s = jButton8.getText();
+        if(s.equalsIgnoreCase(""))
+        {
+            
+            jButton8.setText(flag);
+            moves.put(8, flag);
+            if((computerco<4)&&!end)
+            {
+                computerco++;
+                ComputerMode.generateRand(arr, flag, moves);
+            }
+             end =xWin();
+            end =oWin();
+            boolean ddd = isDraw();
+         
+        }
+         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         // TODO add your handling code here:
+        flag = "X";
+        computerco =0;
+        end = false;
          if(cx && co)
         { 
             
@@ -1718,12 +2093,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             co = false;
             
         }
+         drawCount =0;
         for(int x = 0; x <9; x++ )
         {
             arr[x].setText("");
             arr[x].setEnabled(true);
             arr[x].setBackground(Color.LIGHT_GRAY);
         }
+        moves.clear();
     }//GEN-LAST:event_resetBtnActionPerformed
 
     private void newGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameBtnActionPerformed
@@ -1748,6 +2125,23 @@ public class TicTacToeClient extends javax.swing.JFrame {
         card.next(mycards);
         }
     }//GEN-LAST:event_jLabel52MousePressed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        record = true;
+       jButton9.setText("Recording");
+       jButton9.setBackground(Color.RED);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        HistoryTabel s = new HistoryTabel();
+        dataLocl = LocalDataBase.readLocalFile(localFile);
+        System.out.println("\n inside the history btn"+dataLocl+"\n");
+        s.method(localFile, dataLocl);
+        s.setVisible(true);
+        s.setDefaultCloseOperation(2);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1807,6 +2201,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel hardLabel;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1814,6 +2209,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
