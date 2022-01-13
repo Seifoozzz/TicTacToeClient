@@ -37,7 +37,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     int xCounter = 0;  // int value to count the number of winning game to player x
     int oCounter =0;   //int value to count the number of winning game to player o
     int draw =0;
-    int drawCount=0;
+    static int drawCount=0;
     boolean cx = false;
     boolean co = false;
     String playerX00;
@@ -142,6 +142,29 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 return true;
             }
         }
+        return false;
+        
+    }
+    public  boolean isDrawComputer()
+    {
+        if(drawCount<4)
+        {
+            drawCount++;
+            System.out.print(""+drawCount);
+            return false;
+        } if(cx&&co)
+            {
+                closeButtons();
+                JOptionPane.showMessageDialog(this, "the game is draw try again ");
+                if(record)
+                {
+                    
+                    recordGame();
+                    LocalDataBase.writeLocalGameSteps(localFile, dataLocl ,playerX00, xCounter, playerY00, oCounter, moves, winner);
+                    
+                }
+                return true;
+            }
         return false;
         
     }
@@ -1778,16 +1801,17 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton0.setText(flag);
             moves.put(0, flag);
+             end  =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
             
-             end  =xWin();
-            end =oWin();
-            boolean ddd = isDraw();
             
+            end =oWin();
+            isDrawComputer();
+           
         }
         }
     }//GEN-LAST:event_jButton0ActionPerformed
@@ -1815,14 +1839,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton3.setText(flag);
             moves.put(3, flag);
+            end  =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-             end  =xWin();
+             
             end =oWin();
-            boolean ddd = isDraw();
+            isDrawComputer();
             
         }
         }
@@ -1852,14 +1877,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton1.setText(flag);
             moves.put(1, flag);
+            end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-             end =xWin();
+             
             end=oWin();
-            boolean ddd = isDraw();
+            isDrawComputer();
          
         }
          }
@@ -1887,14 +1913,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton2.setText(flag);
             moves.put(2, flag);
+             end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-            end =xWin();
+           
             end =oWin();
-            boolean ddd = isDraw();
+            isDrawComputer();
           
         }
         }
@@ -1922,14 +1949,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton4.setText(flag);
             moves.put(4, flag);
+            end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-             end =xWin();
+             
             end =oWin();
-            boolean ddd = isDraw();
+           isDrawComputer();
           
         }
          }
@@ -1957,15 +1985,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton5.setText(flag);
             moves.put(5, flag);
-            
+            end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-            end =xWin();
+            
             end =oWin();
-            boolean ddd = isDraw();
+            isDrawComputer();
           
             
             
@@ -1996,14 +2024,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton6.setText(flag);
             moves.put(6, flag);
+            end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-             end =xWin();
+             
             end =oWin();
-            boolean ddd = isDraw();
+           isDrawComputer();
            
         }
          }
@@ -2031,14 +2060,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton7.setText(flag);
             moves.put(7, flag);
+            end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-             end =xWin();
+             
             end =oWin();
-            boolean ddd = isDraw();
+            isDrawComputer();
             
         }
         }
@@ -2066,14 +2096,15 @@ CardLayout card=(CardLayout)mycards.getLayout();
             
             jButton8.setText(flag);
             moves.put(8, flag);
+            end =xWin();
             if((computerco<4)&&!end)
             {
                 computerco++;
                 ComputerMode.generateRand(arr, flag, moves);
             }
-             end =xWin();
+             
             end =oWin();
-            boolean ddd = isDraw();
+           isDrawComputer();
          
         }
          }

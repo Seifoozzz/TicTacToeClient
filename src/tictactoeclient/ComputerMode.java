@@ -8,6 +8,9 @@ package tictactoeclient;
 import java.util.LinkedHashMap;
 import java.util.Random;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import static tictactoeclient.TicTacToeClient.dataLocl;
+import static tictactoeclient.TicTacToeClient.localFile;
 
 /**
  *
@@ -36,5 +39,7 @@ public class ComputerMode {
         
        
     }
+    
+    
     
 }
