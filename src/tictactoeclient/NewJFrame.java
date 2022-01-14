@@ -77,7 +77,17 @@ public class NewJFrame extends javax.swing.JFrame  {
         
        
     }
-
+ public void createScane(String mode,String win,String lose){
+     if(win.equals(lose))
+            {
+                vidoe="Winner.mp4";
+            }
+     else  vidoe = "Loser.mp4";
+           
+         setSize(500,350);
+         setLocationRelativeTo(null);
+         Platform.runLater(s);
+ }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,7 +99,7 @@ public class NewJFrame extends javax.swing.JFrame  {
 
         jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
