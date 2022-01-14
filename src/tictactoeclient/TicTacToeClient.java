@@ -50,7 +50,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     boolean record = false;
     Boolean success=false;
     boolean end=false;
-    String playerName;
+    public static String playerName;
     String playerEmail;
     String playingMode="";
     int computerco=0;
@@ -58,6 +58,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     int playerWins;
     int playerLoses;
     String secPlayer;
+    
     LinkedHashMap<Integer, String> moves = new LinkedHashMap<>();
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
@@ -80,10 +81,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         }
         
         
-        for(int x = 0; x <9; x++ )
-        {
-            arr[x].setText("");
-        }
+        restButtons();
               try {
             
             localFile = new File("local.txt");
@@ -101,6 +99,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
             Logger.getLogger(LocalDataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
               secondPlayer.setText("Computer");
+    }
+    public void restButtons(){
+    
+    for(int x = 0; x <9; x++ )
+        {
+            arr[x].setText("");
+        }
+    
     }
     // method to reset the score of two players
     public void gameScore()
@@ -472,9 +478,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
+        gamesLabel = new javax.swing.JLabel();
+        winLabel = new javax.swing.JLabel();
+        loseLabel = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         ProfileUserName = new javax.swing.JTextField();
         profileUserEmail = new javax.swing.JTextField();
@@ -1195,17 +1201,17 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("Player Email");
 
-        jLabel39.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("Games ");
+        gamesLabel.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
+        gamesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        gamesLabel.setText("Games ");
 
-        jLabel40.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel40.setText("Win");
+        winLabel.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
+        winLabel.setForeground(new java.awt.Color(255, 255, 255));
+        winLabel.setText("Win");
 
-        jLabel41.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel41.setText("Lose");
+        loseLabel.setFont(new java.awt.Font("Tempus Sans ITC", 1, 48)); // NOI18N
+        loseLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loseLabel.setText("Lose");
 
         jLabel42.setFont(new java.awt.Font("Ravie", 0, 48)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(255, 255, 153));
@@ -1251,11 +1257,11 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnProfileBack, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel39)
+                                .addComponent(gamesLabel)
                                 .addGap(192, 192, 192)
-                                .addComponent(jLabel40)))
+                                .addComponent(winLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(loseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(167, 167, 167))))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
@@ -1289,9 +1295,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addComponent(jLabel38)
                         .addGap(45, 45, 45)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel39)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gamesLabel)
+                    .addComponent(winLabel)
+                    .addComponent(loseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(profileGames)
@@ -1612,16 +1618,16 @@ public class TicTacToeClient extends javax.swing.JFrame {
         }
         
         if(success){
-           try {
+         /*  try {
                playerEmail=dataInputStream.readUTF();
                playerName= dataInputStream.readUTF();
                playerGames=dataInputStream.readInt();
                playerWins=dataInputStream.readInt();
-               playerLoses=dataInputStream.readInt();
+               playerLoses=dataInputStream.readInt();*
              
            } catch (IOException ex) {
                Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-           }
+           }*/
           
             JOptionPane.showMessageDialog(null, "Logged in Succcessfully");
          CardLayout card=(CardLayout)mycards.getLayout();
@@ -1630,6 +1636,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
           
         }
         ProfileUserName.setText(playerName);
+            
         profileUserEmail.setText(playerEmail);
         profileGames.setText(""+playerGames);
         profileWins.setText(""+playerWins);
@@ -1714,41 +1721,38 @@ public class TicTacToeClient extends javax.swing.JFrame {
             // TODO add your handling code here:
             
             // TODO add your handling code here:
-//            String email = signEmail.getText().trim();
-//            String userName = signUserName.getText().trim();
-//            String password = signPass.getText().trim();
-//            String confirmPass = confPass.getText().trim();
-//            String key =signUpScreenLabel.getText();
-//            if(password.equals(confirmPass)){
-//                
-//                try {
-//                    dataOutputStream.writeUTF(key);
-//                    dataOutputStream.writeUTF(userName);
-//                    dataOutputStream.writeUTF(email);
-//                    dataOutputStream.writeUTF(password);
-//                    success=dataInputStream.readBoolean();
-//                    if(success){
-//                      playerEmail=dataInputStream.readUTF();
-//                      playerName= dataInputStream.readUTF();
-//                      playerGames=dataInputStream.readInt();
-//                      playerWins=dataInputStream.readInt();
-//                      playerLoses=dataInputStream.readInt();
-//                        JOptionPane.showMessageDialog(null, "registered successfully");
-//                        CardLayout card=(CardLayout)mycards.getLayout();
-//                        card.next(mycards);
-//                          
-//                    } else  JOptionPane.showMessageDialog(null, "Unsuccessfull Regestration Review Your Data and try again");
-//                } catch (IOException ex) {
-//                    Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                ProfileUserName.setText(playerName);
-//                profileUserEmail.setText(playerEmail);
-//                profileGames.setText(""+playerGames);
-//                profileWins.setText(""+playerWins);
-//                profileLose.setText(""+playerLoses);
-//        } else  JOptionPane.showMessageDialog(null, "password didn't match try again");
-CardLayout card=(CardLayout)mycards.getLayout();
+           String email = signEmail.getText().trim();
+         String userName = signUserName.getText().trim();
+           String password = signPass.getText().trim();
+           String confirmPass = confPass.getText().trim();
+            String key =signUpScreenLabel.getText();
+           
+            if(password.equals(confirmPass)){
+                
+                try {
+                    dataOutputStream.writeUTF(key);
+                     System.out.println(key);
+                    dataOutputStream.writeUTF(userName);
+                    dataOutputStream.writeUTF(email);
+                   dataOutputStream.writeUTF(password);
+                    success=dataInputStream.readBoolean();
+                    if(success){
+                    /*  playerEmail=dataInputStream.readUTF();
+                      playerName= dataInputStream.readUTF();
+                      playerGames=dataInputStream.readInt();
+                      playerWins=dataInputStream.readInt();
+                      playerLoses=dataInputStream.readInt();*/
+                        JOptionPane.showMessageDialog(null, "registered successfully");
+                        CardLayout card=(CardLayout)mycards.getLayout();
                         card.next(mycards);
+                          
+                    } else  JOptionPane.showMessageDialog(null, "Unsuccessfull Regestration Review Your Data and try again");
+                } catch (IOException ex) {
+                    Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              
+       } else  JOptionPane.showMessageDialog(null, "password didn't match try again");
+
                 
             
             
@@ -1788,24 +1792,59 @@ CardLayout card=(CardLayout)mycards.getLayout();
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        // TODO add your handling code here:
-        xCounter =0;
-        oCounter = 0;
-        draw = 0;
-        gameScore();
-         for(int x = 0; x <9; x++ )
-        {
-            arr[x].setText("");
-            arr[x].setEnabled(true);
-            arr[x].setBackground(Color.LIGHT_GRAY);
+        try {
+            // TODO add your handling code here:
+            int pWins=Integer.parseInt(profileWins.getText());
+            pWins+=xCounter;
+            profileWins.setText(""+pWins);
+            int pLose=Integer.parseInt(profileLose.getText());
+            pLose+=oCounter;
+            profileLose.setText(""+pLose);
+            int pGames=pWins+pLose;
+            profileGames.setText(""+pGames);
+            String key = exitBtn.getText();
+            String email=profileUserEmail.getText();
+            dataOutputStream.writeUTF(key);
+            dataOutputStream.writeUTF(email);
+            dataOutputStream.writeInt(pGames);
+            dataOutputStream.writeInt(pWins);
+            dataOutputStream.writeInt(pLose);
+            
+            
+                      playerEmail=dataInputStream.readUTF();
+                      playerName= dataInputStream.readUTF();
+                      playerGames=dataInputStream.readInt();
+                      playerWins=dataInputStream.readInt();
+                      playerLoses=dataInputStream.readInt();
+                      
+         ProfileUserName.setText(playerName);
+        profileUserEmail.setText(playerEmail);
+        profileGames.setText(""+playerGames);
+        profileWins.setText(""+playerWins);
+        profileLose.setText(""+playerLoses);
+            
+            xCounter =0;
+            oCounter = 0;
+            draw = 0;
+            gameScore();
+            restButtons();
+            for(int x = 0; x <9; x++ )
+            {
+                arr[x].setText("");
+                arr[x].setEnabled(true);
+                arr[x].setBackground(Color.LIGHT_GRAY);
+            }
+            secondPlayer.setText("player O");
+            firstPlayer.setText("Player X");
+            CardLayout card=(CardLayout)mycards.getLayout();
+            for(int i=0;i<3;i++){
+                card.next(mycards);
+            }
+            playingMode="";
+            flag="X";
+        } catch (IOException ex) {
+            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-         secondPlayer.setText("player O");
-         firstPlayer.setText("Player X");
-        CardLayout card=(CardLayout)mycards.getLayout();
-        for(int i=0;i<3;i++){
-          card.next(mycards);
-        }
-        playingMode="";
         
     }//GEN-LAST:event_exitBtnActionPerformed
 
@@ -2171,6 +2210,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
         oCounter = 0;
         draw = 0;
         gameScore();
+        restButtons();
     }//GEN-LAST:event_newGameBtnActionPerformed
 
     private void btnProfileBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfileBackMousePressed
@@ -2182,6 +2222,11 @@ CardLayout card=(CardLayout)mycards.getLayout();
 
     private void jLabel52MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel52MousePressed
         // TODO add your handling code here:
+          ProfileUserName.setText(playerName);
+                profileUserEmail.setText(playerEmail);
+                profileGames.setText(""+playerGames);
+                profileWins.setText(""+playerWins);
+                profileLose.setText(""+playerLoses);
         CardLayout card=(CardLayout) mycards.getLayout();
         for (int i=0;i<2;i++){
         card.next(mycards);
@@ -2250,7 +2295,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ProfileUserName;
+    public javax.swing.JTextField ProfileUserName;
     private javax.swing.JLabel btnProfileBack;
     private javax.swing.JLabel computerLabel;
     private javax.swing.JPasswordField confPass;
@@ -2260,6 +2305,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
     private javax.swing.JTextField emailField;
     private javax.swing.JButton exitBtn;
     private javax.swing.JLabel firstPlayer;
+    private javax.swing.JLabel gamesLabel;
     private javax.swing.JLabel hardLabel;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
@@ -2304,10 +2350,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -2330,6 +2373,7 @@ CardLayout card=(CardLayout)mycards.getLayout();
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel loseLabel;
     private javax.swing.JLabel mediumLabel;
     private javax.swing.JPanel mycards;
     private javax.swing.JButton newGameBtn;
@@ -2350,5 +2394,6 @@ CardLayout card=(CardLayout)mycards.getLayout();
     private javax.swing.JLabel signUpScreenLabel;
     private javax.swing.JTextField signUserName;
     private javax.swing.JLabel signinLabel;
+    private javax.swing.JLabel winLabel;
     // End of variables declaration//GEN-END:variables
 }

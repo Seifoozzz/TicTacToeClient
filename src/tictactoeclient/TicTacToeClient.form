@@ -1239,13 +1239,13 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="btnProfileBack" min="-2" pref="120" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
+                                      <Component id="gamesLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
-                                      <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
+                                      <Component id="winLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel41" min="-2" pref="135" max="-2" attributes="0"/>
+                              <Component id="loseLabel" min="-2" pref="135" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1289,9 +1289,9 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel41" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="gamesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="winLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="loseLabel" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1331,7 +1331,7 @@
                 <Property name="text" type="java.lang.String" value="Player Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel39">
+            <Component class="javax.swing.JLabel" name="gamesLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tempus Sans ITC" size="48" style="1"/>
@@ -1342,7 +1342,7 @@
                 <Property name="text" type="java.lang.String" value="Games "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel40">
+            <Component class="javax.swing.JLabel" name="winLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tempus Sans ITC" size="48" style="1"/>
@@ -1353,7 +1353,7 @@
                 <Property name="text" type="java.lang.String" value="Win"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel41">
+            <Component class="javax.swing.JLabel" name="loseLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tempus Sans ITC" size="48" style="1"/>
@@ -1376,6 +1376,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="ProfileUserName">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="profileUserEmail">
             </Component>

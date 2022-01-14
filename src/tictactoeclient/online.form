@@ -103,9 +103,9 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="playerX" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="playerO" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="drawlable" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="xLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="olabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="drawLable" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -142,16 +142,16 @@
                                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="firstPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="playerX" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="xLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="playerO" min="-2" max="-2" attributes="0"/>
+                                  <Component id="olabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="drawcont" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="drawlable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="drawLable" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="newGameBtn" min="-2" pref="73" max="-2" attributes="0"/>
@@ -379,7 +379,7 @@
             <Property name="text" type="java.lang.String" value="Draw "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="playerX">
+        <Component class="javax.swing.JLabel" name="xLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="0"/>
@@ -390,7 +390,7 @@
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="playerO">
+        <Component class="javax.swing.JLabel" name="olabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="0"/>
@@ -401,7 +401,7 @@
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="drawlable">
+        <Component class="javax.swing.JLabel" name="drawLable">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="0"/>

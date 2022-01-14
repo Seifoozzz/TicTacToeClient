@@ -33,7 +33,7 @@ public class ClientBaseClass {
     public static final String iWantToPlay = "iWantToPlay";
     public static final String  letsPlay= "letsPlay";
     public static final String  yourSymbole= "yourSymbole";
-    
+    public String Name;
     
     
     public void onSelect(JButton button,String symbole){
@@ -69,10 +69,10 @@ public class ClientBaseClass {
     
     
     
-    public ClientBaseClass(ArrayList<JButton> buttons) {
+    public ClientBaseClass(ArrayList<JButton> buttons,String myName) {
         try {
             this.buttons = buttons;
-            
+            Name=myName;
             buttons.forEach(button->{
                 button.addActionListener(this::onButtonClicked);
             });
@@ -80,7 +80,8 @@ public class ClientBaseClass {
             s = new Socket("127.0.0.1",5004);
             dis= new DataInputStream(s.getInputStream());
             dos = new DataOutputStream(s.getOutputStream());
-            dos.writeUTF(iWantToPlay);
+            dos.writeUTF(iWantToPlay+separator+myName);
+            System.out.println("hellooooo"+iWantToPlay+separator+Name);
             new requestRecever().start();
         } catch (IOException ex) {
             Logger.getLogger(ClientBaseClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,12 +155,13 @@ public class ClientBaseClass {
                 try {
                     String message = dis.readUTF();
                     String[] request = message.split(separator);
-                    System.out.println(message);
+                    
+                    
                     
                     if(request[0].equals(yourSymbole)){
                         // request[1] == my simbole
-                        mySymbole = request[1];
-                        System.out.println(mySymbole);
+                       mySymbole = request[1];
+                       otherPlayerName=request[2];
                     }else if(request[0].equals(letsPlay)){
                         // game.setVisible(true);
                         onLetsPlay();
@@ -182,7 +184,7 @@ public class ClientBaseClass {
                         if(gameState == draw)
                             onDraw();
                         if(gameState == playing)
-                            currentTurn = request[3];
+                           currentTurn = request[3];
 
                         witingServer = false;
                     }
@@ -211,7 +213,7 @@ public class ClientBaseClass {
     public  int gameState = playing;
     public String currentTurn = X;
     public String winnerSymbole;
-    
+    public String otherPlayerName;
     
     
 }

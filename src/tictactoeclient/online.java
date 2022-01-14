@@ -22,15 +22,23 @@ import javax.swing.JOptionPane;
 public class online extends javax.swing.JFrame {
 
    
-    
+    int x,o,draw;
     ArrayList<JButton> buttons;
     ClientBaseClass clBas;
+    public String name="";
+    TicTacToeClient tc;
     public online() {
         initComponents();
-       
+        
+        name=TicTacToeClient.playerName;
+        
+      
+       x=Integer.valueOf(xLabel.getText());
+       o=Integer.valueOf(olabel.getText());
+       draw=Integer.valueOf(drawLable.getText());
       jPanel8.setVisible(false);
         buttons = new ArrayList<>(Arrays.asList(new JButton[]{jButton0,jButton1,jButton2,jButton3,jButton4,jButton5,jButton6,jButton7,jButton8}));
-       clBas = new ClientBaseClass(buttons){
+       clBas = new ClientBaseClass(buttons,name){
             @Override
             public void onFinsh() {
                 super.onFinsh(); //To change body of generated methods, choose Tools | Templates.
@@ -40,23 +48,29 @@ public class online extends javax.swing.JFrame {
             public void onLetsPlay() {
                 super.onLetsPlay(); //To change body of generated methods, choose Tools | Templates.
                 jPanel8.setVisible(true);
+                 firstPlayer.setText(clBas.Name);
+                 secondPlayer.setText(otherPlayerName);
+                 
             }
 
             @Override
             public void onDraw() {
                 super.onDraw(); //To change body of generated methods, choose Tools | Templates.
+                 drawLable.setText(""+(draw+1));
                 JOptionPane.showMessageDialog(null,"It's draw");
             }
 
             @Override
             public void onLose() {
                 super.onLose(); //To change body of generated methods, choose Tools | Templates.
+                olabel.setText(""+(o+1));
                 JOptionPane.showMessageDialog(null, "YOU LOSE ");
             }
 
             @Override
             public void onWin() {
                 super.onWin(); //To change body of generated methods, choose Tools | Templates.
+                xLabel.setText(""+(x+1));
                 JOptionPane.showMessageDialog(null, "YOU WIN ");
             }
 
@@ -67,8 +81,9 @@ public class online extends javax.swing.JFrame {
             }
            
        };
+        firstPlayer.setText(clBas.Name);
+         System.out.println("other name is :"+clBas.otherPlayerName);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,9 +111,9 @@ public class online extends javax.swing.JFrame {
         firstPlayer = new javax.swing.JLabel();
         secondPlayer = new javax.swing.JLabel();
         drawcont = new javax.swing.JLabel();
-        playerX = new javax.swing.JLabel();
-        playerO = new javax.swing.JLabel();
-        drawlable = new javax.swing.JLabel();
+        xLabel = new javax.swing.JLabel();
+        olabel = new javax.swing.JLabel();
+        drawLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,17 +195,17 @@ public class online extends javax.swing.JFrame {
         drawcont.setForeground(new java.awt.Color(204, 255, 204));
         drawcont.setText("Draw ");
 
-        playerX.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        playerX.setForeground(new java.awt.Color(255, 255, 0));
-        playerX.setText("0");
+        xLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        xLabel.setForeground(new java.awt.Color(255, 255, 0));
+        xLabel.setText("0");
 
-        playerO.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        playerO.setForeground(new java.awt.Color(255, 255, 51));
-        playerO.setText("0");
+        olabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        olabel.setForeground(new java.awt.Color(255, 255, 51));
+        olabel.setText("0");
 
-        drawlable.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        drawlable.setForeground(new java.awt.Color(255, 255, 102));
-        drawlable.setText("0");
+        drawLable.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        drawLable.setForeground(new java.awt.Color(255, 255, 102));
+        drawLable.setText("0");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -233,9 +248,9 @@ public class online extends javax.swing.JFrame {
                                     .addComponent(drawcont))
                                 .addGap(44, 44, 44)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(playerX)
-                                    .addComponent(playerO)
-                                    .addComponent(drawlable)))
+                                    .addComponent(xLabel)
+                                    .addComponent(olabel)
+                                    .addComponent(drawLable)))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -263,13 +278,13 @@ public class online extends javax.swing.JFrame {
                                 .addGap(13, 13, 13)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(firstPlayer)
-                                    .addComponent(playerX))
+                                    .addComponent(xLabel))
                                 .addGap(18, 18, 18)
-                                .addComponent(playerO)))
+                                .addComponent(olabel)))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(drawcont)
-                            .addComponent(drawlable))
+                            .addComponent(drawLable))
                         .addGap(18, 18, 18)
                         .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -402,11 +417,13 @@ public class online extends javax.swing.JFrame {
                 new online().setVisible(true);
             }
         });
+       
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel drawLable;
     private javax.swing.JLabel drawcont;
-    private javax.swing.JLabel drawlable;
     private javax.swing.JButton exitBtn;
     private javax.swing.JLabel firstPlayer;
     private javax.swing.JButton jButton0;
@@ -422,9 +439,9 @@ public class online extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JButton newGameBtn;
-    private javax.swing.JLabel playerO;
-    private javax.swing.JLabel playerX;
+    private javax.swing.JLabel olabel;
     private javax.swing.JButton resetBtn;
     private javax.swing.JLabel secondPlayer;
+    private javax.swing.JLabel xLabel;
     // End of variables declaration//GEN-END:variables
 }
