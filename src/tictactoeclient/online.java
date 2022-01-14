@@ -4,6 +4,8 @@ package tictactoeclient;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,7 +15,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static tictactoeclient.TicTacToeClient.dataOutputStream;
 
 /**
  *
@@ -65,6 +69,10 @@ public class online extends javax.swing.JFrame {
                 super.onLose(); //To change body of generated methods, choose Tools | Templates.
                 olabel.setText(""+(o+1));
                 JOptionPane.showMessageDialog(null, "YOU LOSE ");
+                 NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane("Loser.mp4",winnerSymbole,mySymbole);
+                framVidoe.setDefaultCloseOperation(2);
             }
 
             @Override
@@ -72,6 +80,10 @@ public class online extends javax.swing.JFrame {
                 super.onWin(); //To change body of generated methods, choose Tools | Templates.
                 xLabel.setText(""+(x+1));
                 JOptionPane.showMessageDialog(null, "YOU WIN ");
+                NewJFrame framVidoe = new NewJFrame();
+                framVidoe.setVisible(true);
+                framVidoe.createScane("Winner.mp4",winnerSymbole,mySymbole);
+                framVidoe.setDefaultCloseOperation(2);
             }
 
             @Override
@@ -363,6 +375,34 @@ public class online extends javax.swing.JFrame {
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
+            String key = exitBtn.getText();
+            String email=TicTacToeClient.playerEmail;
+            System.out.println(TicTacToeClient.playerLoses);
+            TicTacToeClient.playerLoses+=Integer.valueOf(olabel.getText());           
+            TicTacToeClient.playerWins+=Integer.valueOf(xLabel.getText());
+            TicTacToeClient.playerGames=TicTacToeClient.playerWins+TicTacToeClient.playerLoses;
+            
+            
+        try {
+            dataOutputStream.writeUTF(key); 
+            dataOutputStream.writeUTF(email);
+            dataOutputStream.writeInt(TicTacToeClient.playerGames);
+            dataOutputStream.writeInt(TicTacToeClient.playerWins);
+            dataOutputStream.writeInt(TicTacToeClient.playerLoses);
+        } catch (IOException ex) {
+            Logger.getLogger(online.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       this.setVisible(false);
+      
+       //stc.setVisible(true);
+       
+       this.addWindowListener(new WindowAdapter() {
+           @Override
+           public void windowClosed(WindowEvent e) {
+              tc.setVisible(true);
+           }
+
+       });
      /*   xCounter =0;
         oCounter = 0;
         draw = 0;

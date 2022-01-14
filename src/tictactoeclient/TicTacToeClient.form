@@ -914,7 +914,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jLabel52" min="-2" max="-2" attributes="0"/>
+                              <Component id="Profile" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="136" max="32767" attributes="0"/>
@@ -931,7 +931,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="jLabel52" min="-2" max="-2" attributes="0"/>
+                              <Component id="Profile" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -1025,7 +1025,7 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="computerLabelMousePressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel52">
+            <Component class="javax.swing.JLabel" name="Profile">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="ff" red="ff" type="rgb"/>
@@ -1039,7 +1039,7 @@
                 <Property name="text" type="java.lang.String" value="Your Profile  "/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel52MousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ProfileMousePressed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -1392,6 +1392,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="profileWins">
               <Properties>
@@ -1403,6 +1406,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="profileLose">
               <Properties>
@@ -1414,6 +1420,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="btnProfileBack">
               <Properties>

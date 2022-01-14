@@ -72,7 +72,17 @@ public class NewJFrame extends javax.swing.JFrame  {
         setLocationRelativeTo(null);
         Platform.runLater(s);
     }
-
+ public void createScane(String mode,String win,String lose){
+     if(win.equals(lose))
+            {
+                vidoe="Winner.mp4";
+            }
+     else  vidoe = "Loser.mp4";
+           
+         setSize(500,350);
+         setLocationRelativeTo(null);
+         Platform.runLater(s);
+ }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
