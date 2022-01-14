@@ -167,6 +167,9 @@ public class LocalDataBase {
     public void playclick(JButton btn,JButton arr[], int index, boolean record, LinkedHashMap<Integer, String> moves) {
        System.out.print("inside playclick");
              String var = btn.getText();
+             if (var.equalsIgnoreCase(""))
+             {
+             
         if (var.equalsIgnoreCase("")) {
             btn.setText(mnmx.sgm);
             System.out.print("the index"+index);
@@ -247,5 +250,6 @@ public class LocalDataBase {
 
             }
         }
+    }
     }
 }
