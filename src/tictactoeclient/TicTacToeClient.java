@@ -1755,7 +1755,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                    dataOutputStream.writeUTF(password);
                     success=dataInputStream.readBoolean();
                     if(success){
-                      playerEmail=dataInputStream.readUTF();
+                   /*   playerEmail=dataInputStream.readUTF();
                       playerName= dataInputStream.readUTF();
                       playerGames=dataInputStream.readInt();
                       playerWins=dataInputStream.readInt();
@@ -1764,7 +1764,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                       profileUserEmail.setText(playerEmail);
                       profileGames.setText(""+playerGames);
                       profileWins.setText(""+playerWins);
-                      profileLose.setText(""+playerLoses);
+                      profileLose.setText(""+playerLoses);*/
                         JOptionPane.showMessageDialog(null, "registered successfully");
                         CardLayout card=(CardLayout)mycards.getLayout();
                         card.next(mycards);
@@ -1792,6 +1792,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        firstPlayer.setText(playerName);
         easy = easyLabel.getText();
     }//GEN-LAST:event_easyLabelMousePressed
 
@@ -1800,6 +1801,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        firstPlayer.setText(playerName);
         medium = mediumLabel.getText();
     }//GEN-LAST:event_mediumLabelMousePressed
 
@@ -1808,6 +1810,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        firstPlayer.setText(playerName);
         hard = hardLabel.getText();
     }//GEN-LAST:event_hardLabelMousePressed
 
