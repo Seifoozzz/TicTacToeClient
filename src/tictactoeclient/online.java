@@ -50,24 +50,24 @@ public class online extends javax.swing.JFrame {
 
             @Override
             public void onLetsPlay() {
-                super.onLetsPlay(); //To change body of generated methods, choose Tools | Templates.
+                super.onLetsPlay(); 
                 jPanel8.setVisible(true);
                  firstPlayer.setText(oBase.Name);
                  secondPlayer.setText(otherPlayerName);
-                 jLabel46.setText(currentTurn);
+               
                  
             }
 
             @Override
             public void onDraw() {
-                super.onDraw(); //To change body of generated methods, choose Tools | Templates.
+                super.onDraw(); 
                  drawLable.setText(""+(draw+1));
                 JOptionPane.showMessageDialog(null,"It's draw");
             }
 
             @Override
             public void onLose() {
-                super.onLose(); //To change body of generated methods, choose Tools | Templates.
+                super.onLose(); 
                 olabel.setText(""+(o+1));
                 JOptionPane.showMessageDialog(null, "YOU LOSE ");
                  NewJFrame framVidoe = new NewJFrame();

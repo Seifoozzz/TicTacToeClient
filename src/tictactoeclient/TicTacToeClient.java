@@ -65,6 +65,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     public static int pWins;
      public static int pLose;
       public static int pGames;
+      Snake sn;
     LinkedHashMap<Integer, String> moves = new LinkedHashMap<>();
     JButton [] arr = new JButton[9];
     public TicTacToeClient() {
@@ -834,12 +835,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
         signPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signPassActionPerformed(evt);
-            }
-        });
-
-        confPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confPassActionPerformed(evt);
             }
         });
 
@@ -1632,7 +1627,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private void signinLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinLabelMousePressed
         // TODO add your handling code here:
 
-     /*  try {
+     try {
             String email = emailField.getText().trim();
             String password = passwordFeild.getText().trim();
             String key=signinLabel.getText();
@@ -1677,7 +1672,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
        
             
         
-   //     }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+        }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
              //}else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
 
 
@@ -1687,10 +1682,6 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private void signPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signPassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_signPassActionPerformed
-
-    private void confPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confPassActionPerformed
 
     private void signUpLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpLabelMousePressed
         // TODO add your handling code here:
@@ -2879,17 +2870,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void snakeLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_snakeLabelMousePressed
-        // TODO add your handling code here:
-       /* this.setVisible(false);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                 //To c
-                   
-               
-            }
-            
-});*/
+       
+       
      
    new Snake().setVisible(true);
        
