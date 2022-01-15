@@ -1754,7 +1754,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                    dataOutputStream.writeUTF(password);
                     success=dataInputStream.readBoolean();
                     if(success){
-                      playerEmail=dataInputStream.readUTF();
+                   /*   playerEmail=dataInputStream.readUTF();
                       playerName= dataInputStream.readUTF();
                       playerGames=dataInputStream.readInt();
                       playerWins=dataInputStream.readInt();
@@ -1763,7 +1763,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                       profileUserEmail.setText(playerEmail);
                       profileGames.setText(""+playerGames);
                       profileWins.setText(""+playerWins);
-                      profileLose.setText(""+playerLoses);
+                      profileLose.setText(""+playerLoses);*/
                         JOptionPane.showMessageDialog(null, "registered successfully");
                         CardLayout card=(CardLayout)mycards.getLayout();
                         card.next(mycards);
@@ -1791,6 +1791,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        firstPlayer.setText(playerName);
         easy = easyLabel.getText();
     }//GEN-LAST:event_easyLabelMousePressed
 
@@ -1799,6 +1800,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        firstPlayer.setText(playerName);
         medium = mediumLabel.getText();
     }//GEN-LAST:event_mediumLabelMousePressed
 
@@ -1807,6 +1809,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         CardLayout card=(CardLayout)mycards.getLayout();
         card.last(mycards);
         secondPlayer.setText("Computer");
+        firstPlayer.setText(playerName);
         hard = hardLabel.getText();
     }//GEN-LAST:event_hardLabelMousePressed
 
@@ -1820,23 +1823,24 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-//        try {
+        
+        try {
             // TODO add your handling code here:
-//            pWins=Integer.parseInt(profileWins.getText());
-//            pWins+=xCounter;
-//            profileWins.setText(""+pWins);
-//            pLose=Integer.parseInt(profileLose.getText());
-//            pLose+=oCounter;
-//            profileLose.setText(""+pLose);
-//            pGames=pWins+pLose;
-//            profileGames.setText(""+pGames);
-//            String key = exitBtn.getText();
-//            String email=profileUserEmail.getText();
-//            dataOutputStream.writeUTF(key);
-//            dataOutputStream.writeUTF(email);
-//            dataOutputStream.writeInt(pGames);
-//            dataOutputStream.writeInt(pWins);
-//            dataOutputStream.writeInt(pLose);
+            pWins=Integer.parseInt(profileWins.getText());
+            pWins+=xCounter;
+            profileWins.setText(""+pWins);
+            pLose=Integer.parseInt(profileLose.getText());
+            pLose+=oCounter;
+            profileLose.setText(""+pLose);
+            pGames=pWins+pLose;
+            profileGames.setText(""+pGames);
+            String key = exitBtn.getText();
+            String email=profileUserEmail.getText();
+            dataOutputStream.writeUTF(key);
+            dataOutputStream.writeUTF(email);
+            dataOutputStream.writeInt(pGames);
+            dataOutputStream.writeInt(pWins);
+            dataOutputStream.writeInt(pLose);
             
             
                    
@@ -1857,12 +1861,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
             CardLayout card=(CardLayout)mycards.getLayout();
             for(int i=0;i<3;i++){
                 card.next(mycards);
-            }
+            
             playingMode="";
             flag="X";
-//        } catch (IOException ex) {
-//            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
+        }} catch (IOException ex) {
+            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
 //        // TODO add your handling code here:
+                }
       xCounter =0;
         oCounter = 0;
         draw = 0;
@@ -1872,6 +1877,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
         easy ="";
         hard ="";
         medium="";
+        
+        // TODO add your handling code here:
+      xCounter =0;
+        oCounter = 0;
+        draw = 0;
+        drawCount = 0;
+        gameScore();
+        base.comInd = -1;
 
         base.is_loss = false;
         base.is_win = false;
@@ -1894,7 +1907,8 @@ public class TicTacToeClient extends javax.swing.JFrame {
             arr[x].setBackground(Color.LIGHT_GRAY);
         }
 
-//        }   
+         
+        
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
@@ -1945,10 +1959,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 recordGameHard();
@@ -1960,10 +1976,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =firstPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 recordGameHard();
@@ -2032,10 +2050,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 recordGameHard();
@@ -2047,10 +2067,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =firstPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 recordGameHard();
@@ -2118,10 +2140,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2134,10 +2158,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2205,10 +2231,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerO.setText(""+base.mnmx.oppScore);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
                 
             {
@@ -2222,10 +2250,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =firstPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2297,10 +2327,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2313,10 +2345,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2387,10 +2421,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                  if(record)
             {
                 
@@ -2403,10 +2439,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =firstPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                  if(record)
             {
                 
@@ -2474,10 +2512,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2490,10 +2530,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2562,10 +2604,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2578,11 +2622,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =firstPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
                 
+
                 if(record)
             {
                 
@@ -2651,10 +2697,12 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =secondPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                  playerO.setText(""+base.mnmx.oppScore);
+
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"o");
                 framVidoe.setDefaultCloseOperation(2);
+
                 if(record)
             {
                 
@@ -2667,10 +2715,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 String s =firstPlayer.getText();
                 JOptionPane.showMessageDialog(this, "player "+s+" is win");
                 playerX.setText(""+base.mnmx.Score);
+
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
                 framVidoe.createScane(playingMode,"x");
                 framVidoe.setDefaultCloseOperation(2);
+
+
+
                 if(record)
             {
                 

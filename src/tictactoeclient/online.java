@@ -54,6 +54,7 @@ public class online extends javax.swing.JFrame {
                 jPanel8.setVisible(true);
                  firstPlayer.setText(clBas.Name);
                  secondPlayer.setText(otherPlayerName);
+                 jLabel46.setText(currentTurn);
                  
             }
 

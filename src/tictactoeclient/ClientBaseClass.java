@@ -5,6 +5,7 @@
  */
 package tictactoeclient;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -100,29 +101,43 @@ public class ClientBaseClass {
             if (
                 buttons.get(i * 3).getText().equals(currentTurn) &&
                 buttons.get((i * 3) + 1).getText().equals(currentTurn)&&
-                buttons.get((i * 3) + 2).getText().equals(currentTurn)||
+                buttons.get((i * 3) + 2).getText().equals(currentTurn)){
+                buttons.get(i * 3).setBackground(Color.GREEN);
+                buttons.get((i * 3)+1).setBackground(Color.GREEN);
+                buttons.get((i * 3)+2).setBackground(Color.GREEN);
+             return  currentTurn.equals(mySymbole)?youWin:youLose;
+            }
 
-                buttons.get(i).getText().equals(currentTurn)  &&
-                buttons.get(i + 3).getText().equals(currentTurn) &&
-                buttons.get(i + 6).getText().equals(currentTurn)
-                ) 
+              if(  buttons.get(i).getText().equals(currentTurn)  &&
+                   buttons.get(i + 3).getText().equals(currentTurn) &&
+                   buttons.get(i + 6).getText().equals(currentTurn))
             {
-                
+                 buttons.get(i).setBackground(Color.GREEN);
+                 buttons.get(i +3).setBackground(Color.GREEN);
+                 buttons.get(i+6).setBackground(Color.GREEN);
                 return  currentTurn.equals(mySymbole)?youWin:youLose;
+                
             }
         } 
 
         if (
             buttons.get(0).getText().equals(currentTurn) &&
             buttons.get(4).getText().equals(currentTurn) &&
-            buttons.get(8).getText().equals(currentTurn) ||
+            buttons.get(8).getText().equals(currentTurn) ){
+             buttons.get(0 ).setBackground(Color.GREEN);
+                 buttons.get(4).setBackground(Color.GREEN);
+                 buttons.get(8).setBackground(Color.GREEN);
+                 return currentTurn.equals(mySymbole)?youWin:youLose;
+        }
                 
-            buttons.get(2).getText().equals(currentTurn) &&
+          if(  buttons.get(2).getText().equals(currentTurn) &&
             buttons.get(4).getText().equals(currentTurn) &&
             buttons.get(6).getText().equals(currentTurn)
             )
         {
-             
+                 buttons.get(2 ).setBackground(Color.GREEN);
+                 buttons.get(4).setBackground(Color.GREEN);
+                 buttons.get(6).setBackground(Color.GREEN);
             return currentTurn.equals(mySymbole)?youWin:youLose;
         }
         
@@ -136,7 +151,7 @@ public class ClientBaseClass {
     
     private void onButtonClicked(ActionEvent evt){
             JButton button = (JButton)evt.getSource();
-            System.out.println(currentTurn.equals(mySymbole) && button.getText().equals("") && gameState==playing && !witingServer);
+           
             if(currentTurn.equals(mySymbole) && button.getText().equals("") && gameState==playing && !witingServer){
                 try {
                     int pos = buttons.indexOf(button);
@@ -159,21 +174,18 @@ public class ClientBaseClass {
                     
                     
                     if(request[0].equals(yourSymbole)){
-                        // request[1] == my simbole
+                        
                        mySymbole = request[1];
                        otherPlayerName=request[2];
                     }else if(request[0].equals(letsPlay)){
-                        // game.setVisible(true);
+                        
                         onLetsPlay();
                         currentTurn = X;
                     }else if(request[0].equals(move)){
-                        // request[1] == position
-                        // request[2] == symbole
-                        // request[3] == nextSymbole
                         
-                        System.out.println(request);
+                       
                         Integer pos = Integer.valueOf(request[1]);
-                        //  buttons.get(pos).setText(request[2]);
+                       
                         onSelect(buttons.get(pos),currentTurn);
                         gameState = getGameState();
 
@@ -189,7 +201,7 @@ public class ClientBaseClass {
                         witingServer = false;
                     }
                     
-                    System.out.println(currentTurn);
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(ClientBaseClass.class.getName()).log(Level.SEVERE, null, ex);
                 }
