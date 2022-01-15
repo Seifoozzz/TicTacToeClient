@@ -1637,7 +1637,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         }
         
         if(success){
-          /* try {
+           try {
                playerEmail=dataInputStream.readUTF();
                playerName= dataInputStream.readUTF();
                playerGames=dataInputStream.readInt();
@@ -1651,7 +1651,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
            } catch (IOException ex) {
                Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
            }
-          */
+          
             JOptionPane.showMessageDialog(null, "Logged in Succcessfully");
          CardLayout card=(CardLayout)mycards.getLayout();
         for(int i=0;i<2;i++){
@@ -1754,7 +1754,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                    dataOutputStream.writeUTF(password);
                     success=dataInputStream.readBoolean();
                     if(success){
-                   /*   playerEmail=dataInputStream.readUTF();
+                      playerEmail=dataInputStream.readUTF();
                       playerName= dataInputStream.readUTF();
                       playerGames=dataInputStream.readInt();
                       playerWins=dataInputStream.readInt();
@@ -1763,7 +1763,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                       profileUserEmail.setText(playerEmail);
                       profileGames.setText(""+playerGames);
                       profileWins.setText(""+playerWins);
-                      profileLose.setText(""+playerLoses);*/
+                      profileLose.setText(""+playerLoses);
                         JOptionPane.showMessageDialog(null, "registered successfully");
                         CardLayout card=(CardLayout)mycards.getLayout();
                         card.next(mycards);
@@ -1842,7 +1842,16 @@ public class TicTacToeClient extends javax.swing.JFrame {
             dataOutputStream.writeInt(pWins);
             dataOutputStream.writeInt(pLose);
             
-            
+                      playerEmail=dataInputStream.readUTF();
+                      playerName= dataInputStream.readUTF();
+                      playerGames=dataInputStream.readInt();
+                      playerWins=dataInputStream.readInt();
+                      playerLoses=dataInputStream.readInt();
+                      ProfileUserName.setText(playerName);
+                      profileUserEmail.setText(playerEmail);
+                      profileGames.setText(""+playerGames);
+                      profileWins.setText(""+playerWins);
+                      profileLose.setText(""+playerLoses);
                    
             
             xCounter =0;
@@ -2823,25 +2832,14 @@ public class TicTacToeClient extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProfileBackMousePressed
 
     private void ProfileMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileMousePressed
-        try {
+        
             // TODO add your handling code here:
-            playerEmail=dataInputStream.readUTF();
-            playerName= dataInputStream.readUTF();
-            playerGames=dataInputStream.readInt();
-            playerWins=dataInputStream.readInt();
-            playerLoses=dataInputStream.readInt();
-            ProfileUserName.setText(playerName);
-            profileUserEmail.setText(playerEmail);
-            profileGames.setText(""+playerGames);
-            profileWins.setText(""+playerWins);
-            profileLose.setText(""+playerLoses);
+          
             CardLayout card=(CardLayout) mycards.getLayout();
             for (int i=0;i<2;i++){
                 card.next(mycards);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(TicTacToeClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }//GEN-LAST:event_ProfileMousePressed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

@@ -28,7 +28,7 @@ public class online extends javax.swing.JFrame {
    
     int x,o,draw;
     ArrayList<JButton> buttons;
-    ClientBaseClass clBas;
+    OnlineBase oBase;
     public String name="";
     TicTacToeClient tc;
     public online() {
@@ -42,7 +42,7 @@ public class online extends javax.swing.JFrame {
        draw=Integer.valueOf(drawLable.getText());
       jPanel8.setVisible(false);
         buttons = new ArrayList<>(Arrays.asList(new JButton[]{jButton0,jButton1,jButton2,jButton3,jButton4,jButton5,jButton6,jButton7,jButton8}));
-       clBas = new ClientBaseClass(buttons,name){
+       oBase = new OnlineBase(buttons,name){
             @Override
             public void onFinsh() {
                 super.onFinsh(); //To change body of generated methods, choose Tools | Templates.
@@ -52,7 +52,7 @@ public class online extends javax.swing.JFrame {
             public void onLetsPlay() {
                 super.onLetsPlay(); //To change body of generated methods, choose Tools | Templates.
                 jPanel8.setVisible(true);
-                 firstPlayer.setText(clBas.Name);
+                 firstPlayer.setText(oBase.Name);
                  secondPlayer.setText(otherPlayerName);
                  jLabel46.setText(currentTurn);
                  
@@ -72,7 +72,7 @@ public class online extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "YOU LOSE ");
                  NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
-                framVidoe.createScane("Loser.mp4",winnerSymbole,mySymbole);
+                framVidoe.createScane("Loser.mp4",winnerFlag,myFlag);
                 framVidoe.setDefaultCloseOperation(2);
             }
 
@@ -83,7 +83,7 @@ public class online extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "YOU WIN ");
                 NewJFrame framVidoe = new NewJFrame();
                 framVidoe.setVisible(true);
-                framVidoe.createScane("Winner.mp4",winnerSymbole,mySymbole);
+                framVidoe.createScane("Winner.mp4",winnerFlag,myFlag);
                 framVidoe.setDefaultCloseOperation(2);
             }
 
@@ -94,8 +94,8 @@ public class online extends javax.swing.JFrame {
             }
            
        };
-        firstPlayer.setText(clBas.Name);
-         System.out.println("other name is :"+clBas.otherPlayerName);
+        firstPlayer.setText(oBase.Name);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,8 +118,6 @@ public class online extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        newGameBtn = new javax.swing.JButton();
-        resetBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
         firstPlayer = new javax.swing.JLabel();
         secondPlayer = new javax.swing.JLabel();
@@ -166,26 +164,6 @@ public class online extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("MV Boli", 1, 48)); // NOI18N
-
-        newGameBtn.setBackground(new java.awt.Color(255, 255, 153));
-        newGameBtn.setFont(new java.awt.Font("Snap ITC", 0, 48)); // NOI18N
-        newGameBtn.setForeground(new java.awt.Color(102, 102, 255));
-        newGameBtn.setText("New Game");
-        newGameBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newGameBtnActionPerformed(evt);
-            }
-        });
-
-        resetBtn.setBackground(new java.awt.Color(255, 255, 153));
-        resetBtn.setFont(new java.awt.Font("Snap ITC", 0, 48)); // NOI18N
-        resetBtn.setForeground(new java.awt.Color(0, 204, 204));
-        resetBtn.setText("Reset");
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
-            }
-        });
 
         exitBtn.setBackground(new java.awt.Color(255, 255, 153));
         exitBtn.setFont(new java.awt.Font("Snap ITC", 0, 48)); // NOI18N
@@ -251,9 +229,9 @@ public class online extends javax.swing.JFrame {
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(132, 132, 132)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(secondPlayer)
@@ -265,14 +243,12 @@ public class online extends javax.swing.JFrame {
                                     .addComponent(olabel)
                                     .addComponent(drawLable)))
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(104, 104, 104)
+                                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(447, 447, 447)
                         .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,12 +274,8 @@ public class online extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(drawcont)
                             .addComponent(drawLable))
-                        .addGap(18, 18, 18)
-                        .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(secondPlayer)
@@ -347,33 +319,6 @@ public class online extends javax.swing.JFrame {
 
 
     
-    private void newGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameBtnActionPerformed
-   /*     // TODO add your handling code here:
-        xCounter =0;
-        oCounter = 0;
-        draw = 0;
-        gameScore();*/
-    }//GEN-LAST:event_newGameBtnActionPerformed
-
-    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
-        // TODO add your handling code here:
-       /* if(cx && co)
-        {
-
-            draw++;
-            drawlable.setText(""+draw);
-            cx = false;
-            co = false;
-
-        }
-        for(int x = 0; x <9; x++ )
-        {
-            arr[x].setText("");
-            arr[x].setEnabled(true);
-            arr[x].setBackground(Color.LIGHT_GRAY);
-        }*/
-    }//GEN-LAST:event_resetBtnActionPerformed
-
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
             String key = exitBtn.getText();
@@ -404,23 +349,7 @@ public class online extends javax.swing.JFrame {
            }
 
        });
-     /*   xCounter =0;
-        oCounter = 0;
-        draw = 0;
-        gameScore();
-        for(int x = 0; x <9; x++ )
-        {
-            arr[x].setText("");
-            arr[x].setEnabled(true);
-            arr[x].setBackground(Color.LIGHT_GRAY);
-        }
-        secondPlayer.setText("player O");
-        firstPlayer.setText("Player X");
-        CardLayout card=(CardLayout)mycards.getLayout();
-        for(int i=0;i<3;i++){
-            card.next(mycards);
-        }
-        playingMode="";*/
+   
 
     }//GEN-LAST:event_exitBtnActionPerformed
 
@@ -479,9 +408,7 @@ public class online extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JButton newGameBtn;
     private javax.swing.JLabel olabel;
-    private javax.swing.JButton resetBtn;
     private javax.swing.JLabel secondPlayer;
     private javax.swing.JLabel xLabel;
     // End of variables declaration//GEN-END:variables

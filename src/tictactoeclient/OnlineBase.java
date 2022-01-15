@@ -21,7 +21,7 @@ import javax.swing.JButton;
  *
  * @author asus
  */
-public class ClientBaseClass {
+public class OnlineBase {
     public static final int draw = 0;
     public static final int youWin = 1;
     public static final int youLose = 2;
@@ -33,7 +33,7 @@ public class ClientBaseClass {
     public static final String separator = ",";
     public static final String iWantToPlay = "iWantToPlay";
     public static final String  letsPlay= "letsPlay";
-    public static final String  yourSymbole= "yourSymbole";
+    public static final String  yourFlag= "yourFlag";
     public String Name;
     
     
@@ -42,19 +42,19 @@ public class ClientBaseClass {
     }
     
     public void onWin(){
-        winnerSymbole = mySymbole;
+        winnerFlag = myFlag;
         onFinsh();
        System.out.println("you win ");
     }
     
     public void onLose(){
-        winnerSymbole = mySymbole.equals(X)?O:X;
+        winnerFlag = myFlag.equals(X)?O:X;
         onFinsh();
         System.out.println("you lose ");
     }
     
     public void onDraw(){
-        winnerSymbole = "TIE";
+        winnerFlag = "TIE";
         onFinsh();
         System.out.println(" draw ");
     }
@@ -70,7 +70,7 @@ public class ClientBaseClass {
     
     
     
-    public ClientBaseClass(ArrayList<JButton> buttons,String myName) {
+    public OnlineBase(ArrayList<JButton> buttons,String myName) {
         try {
             this.buttons = buttons;
             Name=myName;
@@ -82,21 +82,16 @@ public class ClientBaseClass {
             dis= new DataInputStream(s.getInputStream());
             dos = new DataOutputStream(s.getOutputStream());
             dos.writeUTF(iWantToPlay+separator+myName);
-            System.out.println("hellooooo"+iWantToPlay+separator+Name);
             new requestRecever().start();
         } catch (IOException ex) {
-            Logger.getLogger(ClientBaseClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OnlineBase.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
 
     
     public int getGameState(){
-        System.out.println("getGameState");
-        System.out.println(currentTurn==yourSymbole);
-        System.out.println(currentTurn);
-        System.out.println(mySymbole);
-        System.out.println("end getGameState");
+       
             for (int i =0;i<=2;i++) {
             if (
                 buttons.get(i * 3).getText().equals(currentTurn) &&
@@ -105,7 +100,7 @@ public class ClientBaseClass {
                 buttons.get(i * 3).setBackground(Color.GREEN);
                 buttons.get((i * 3)+1).setBackground(Color.GREEN);
                 buttons.get((i * 3)+2).setBackground(Color.GREEN);
-             return  currentTurn.equals(mySymbole)?youWin:youLose;
+             return  currentTurn.equals(myFlag)?youWin:youLose;
             }
 
               if(  buttons.get(i).getText().equals(currentTurn)  &&
@@ -115,7 +110,7 @@ public class ClientBaseClass {
                  buttons.get(i).setBackground(Color.GREEN);
                  buttons.get(i +3).setBackground(Color.GREEN);
                  buttons.get(i+6).setBackground(Color.GREEN);
-                return  currentTurn.equals(mySymbole)?youWin:youLose;
+                return  currentTurn.equals(myFlag)?youWin:youLose;
                 
             }
         } 
@@ -127,7 +122,7 @@ public class ClientBaseClass {
              buttons.get(0 ).setBackground(Color.GREEN);
                  buttons.get(4).setBackground(Color.GREEN);
                  buttons.get(8).setBackground(Color.GREEN);
-                 return currentTurn.equals(mySymbole)?youWin:youLose;
+                 return currentTurn.equals(myFlag)?youWin:youLose;
         }
                 
           if(  buttons.get(2).getText().equals(currentTurn) &&
@@ -138,7 +133,7 @@ public class ClientBaseClass {
                  buttons.get(2 ).setBackground(Color.GREEN);
                  buttons.get(4).setBackground(Color.GREEN);
                  buttons.get(6).setBackground(Color.GREEN);
-            return currentTurn.equals(mySymbole)?youWin:youLose;
+            return currentTurn.equals(myFlag)?youWin:youLose;
         }
         
         for (JButton button : buttons) {
@@ -152,13 +147,13 @@ public class ClientBaseClass {
     private void onButtonClicked(ActionEvent evt){
             JButton button = (JButton)evt.getSource();
            
-            if(currentTurn.equals(mySymbole) && button.getText().equals("") && gameState==playing && !witingServer){
+            if(currentTurn.equals(myFlag) && button.getText().equals("") && gameState==playing && !witingServer){
                 try {
                     int pos = buttons.indexOf(button);
                     dos.writeUTF(move+separator+pos+separator+currentTurn);
                     witingServer = true;
                 } catch (IOException ex) {
-                    Logger.getLogger(ClientBaseClass.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OnlineBase.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
        
@@ -173,9 +168,9 @@ public class ClientBaseClass {
                     
                     
                     
-                    if(request[0].equals(yourSymbole)){
+                    if(request[0].equals(yourFlag)){
                         
-                       mySymbole = request[1];
+                       myFlag = request[1];
                        otherPlayerName=request[2];
                     }else if(request[0].equals(letsPlay)){
                         
@@ -203,7 +198,7 @@ public class ClientBaseClass {
                     
                     
                 } catch (IOException ex) {
-                    Logger.getLogger(ClientBaseClass.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OnlineBase.class.getName()).log(Level.SEVERE, null, ex);
                 }
                     
                     
@@ -221,10 +216,10 @@ public class ClientBaseClass {
     public DataOutputStream dos;
     public   ArrayList<JButton> buttons;
     public boolean witingServer = false;
-    public String mySymbole;
+    public String myFlag;
     public  int gameState = playing;
     public String currentTurn = X;
-    public String winnerSymbole;
+    public String winnerFlag;
     public String otherPlayerName;
     
     
