@@ -1678,6 +1678,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
             
         
    //     }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+             //}else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
 
 
        
