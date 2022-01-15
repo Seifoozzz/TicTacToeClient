@@ -1042,9 +1042,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
             }
         });
 
-        Profile.setBackground(new java.awt.Color(255, 255, 153));
-        Profile.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Profile.setForeground(new java.awt.Color(102, 102, 0));
+        Profile.setBackground(new java.awt.Color(204, 204, 255));
+        Profile.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Profile.setForeground(new java.awt.Color(255, 255, 0));
         Profile.setText("Your Profile  ");
         Profile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
