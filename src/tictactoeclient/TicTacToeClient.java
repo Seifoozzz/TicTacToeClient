@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import snakeGame.Snake;
 
 /**
  *
@@ -457,6 +458,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         signUpLabel = new javax.swing.JLabel();
         signinLabel = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        snakeLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -719,12 +721,33 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 153, 51));
         jLabel18.setText("========================");
 
+        snakeLabel.setFont(new java.awt.Font("Tempus Sans ITC", 0, 48)); // NOI18N
+        snakeLabel.setForeground(new java.awt.Color(255, 255, 51));
+        snakeLabel.setText("Snake Game");
+        snakeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                snakeLabelMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(357, 357, 357))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel18))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(385, 385, 385)
+                        .addComponent(jLabel15)
+                        .addGap(62, 62, 62)
+                        .addComponent(signUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,18 +767,9 @@ public class TicTacToeClient extends javax.swing.JFrame {
                                 .addGap(66, 66, 66)
                                 .addComponent(signinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
-                        .addComponent(jLabel15)
-                        .addGap(62, 62, 62)
-                        .addComponent(signUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jLabel18)))
-                .addContainerGap(137, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(357, 357, 357))
+                        .addGap(460, 460, 460)
+                        .addComponent(snakeLabel)))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -781,11 +795,13 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addComponent(passwordFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16)
                 .addComponent(signinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(signUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(snakeLabel)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel6, "card2");
@@ -996,7 +1012,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                     .addComponent(jLabel29))
                 .addGap(31, 31, 31)
                 .addComponent(signUpScreenLabel)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel3, "card3");
@@ -1083,7 +1099,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(Profile)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1105,7 +1121,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 .addComponent(offlineLabel)
                 .addGap(38, 38, 38)
                 .addComponent(computerLabel)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel4, "card4");
@@ -1186,7 +1202,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(456, 456, 456)
                         .addComponent(mediumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1205,7 +1221,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                 .addComponent(hardLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel5, "card5");
@@ -1271,7 +1287,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ProfileUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(profileUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 235, Short.MAX_VALUE))
+                        .addGap(0, 236, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnProfileBack, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1325,7 +1341,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
                         .addComponent(profileLose)))
                 .addGap(59, 59, 59)
                 .addComponent(btnProfileBack, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         mycards.add(jPanel7, "card7");
@@ -1486,7 +1502,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 120, Short.MAX_VALUE)
+                .addGap(0, 121, Short.MAX_VALUE)
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(97, 97, 97))
             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -1616,7 +1632,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private void signinLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinLabelMousePressed
         // TODO add your handling code here:
 
-       try {
+     /*  try {
             String email = emailField.getText().trim();
             String password = passwordFeild.getText().trim();
             String key=signinLabel.getText();
@@ -1660,7 +1676,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
         }
        
         
-        }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+   //     }else JOptionPane.showMessageDialog(null, "Incorrect user name or password");
 
 
        
@@ -2737,6 +2753,23 @@ public class TicTacToeClient extends javax.swing.JFrame {
         s.setDefaultCloseOperation(2);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void snakeLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_snakeLabelMousePressed
+        // TODO add your handling code here:
+       /* this.setVisible(false);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                 //To c
+                   
+               
+            }
+            
+});*/
+     
+   new Snake().setVisible(true);
+       
+    }//GEN-LAST:event_snakeLabelMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -2881,6 +2914,7 @@ public class TicTacToeClient extends javax.swing.JFrame {
     private javax.swing.JLabel signUpScreenLabel;
     private javax.swing.JTextField signUserName;
     private javax.swing.JLabel signinLabel;
+    private javax.swing.JLabel snakeLabel;
     private javax.swing.JLabel winLabel;
     // End of variables declaration//GEN-END:variables
 }
