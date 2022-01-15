@@ -65,8 +65,10 @@ Fifth: Design For Game
 
 # Team Member 
 
-*Moataz Ahmed 
-*Seif Eldin Mahmoud
-*Aya Abdelaziz Elsayed
+* Moataz Ahmed .
+
+* Seif Eldin Mahmoud .
+
+* Aya Abdelaziz Elsayed.
 
 
